@@ -1,0 +1,23 @@
+# bağımlılıklar
+node_modules/
+
+# derleme çıktısı
+dist/
+
+# ortam / yerel ayarlar
+.env
+.env.local
+*.local
+
+# editör & işletim sistemi
+.claude/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# günlükler
+npm-debug.log*
+yarn-error.log*
+*.log

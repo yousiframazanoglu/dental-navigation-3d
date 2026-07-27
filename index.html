@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dental Navigasyon — Dinamik Cerrahi Navigasyon Sistemi</title>
+  <meta name="description" content="Yapay zekâ destekli anatomik segmentasyon, gerçek zamanlı optik takip ve karma gerçeklik görselleştirmesini tek platformda birleştiren dinamik cerrahi dental navigasyon sistemi." />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body data-theme="light">
+  <canvas id="scene"></canvas>
+
+  <div id="annotations">
+    <div class="anno" data-key="mandible"><span class="anno-dot"></span><span class="anno-txt">Mandibula<i>Alt çene kemiği</i></span></div>
+    <div class="anno" data-key="nerve"><span class="anno-dot danger"></span><span class="anno-txt">Alt Alveolar Kanal<i>Sinir güzergâhı</i></span></div>
+    <div class="anno" data-key="sinus"><span class="anno-dot info"></span><span class="anno-txt">Maksiller Sinüs<i>Hava boşluğu</i></span></div>
+    <div class="anno" data-key="teeth"><span class="anno-dot"></span><span class="anno-txt">Dentisyon<i>Üst + alt dişler</i></span></div>
+  </div>
+
+  <div id="rail"><div id="rail-fill"></div></div>
+
+  <div id="loader">
+    <div class="loader-inner">
+      <div class="loader-label">Segmentasyon modeli yükleniyor</div>
+      <div class="loader-track"><div class="loader-bar" id="loader-bar"></div></div>
+      <div class="loader-pct" id="loader-pct">00</div>
+    </div>
+  </div>
+
+  <header id="nav">
+    <a class="nav-brand" href="#top">
+      <img src="/img/logo.png" alt="" />
+      <span>Dental Navigasyon</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#anatomi">Anatomi</a>
+      <a href="#sorun">Sorun</a>
+      <a href="#mimari">Mimari</a>
+      <a href="#yapayzeka">Yapay Zekâ</a>
+      <a href="#hololens">HoloLens</a>
+      <a href="#arayuz">Arayüz</a>
+      <a href="#hassasiyet">Hassasiyet</a>
+    </nav>
+    <span class="nav-meta">TÜBİTAK 2242 — 2026</span>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="top" data-theme="light">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">TÜBİTAK 2242 · TEKNOFEST 2026 — Sağlık Kategorisi</p>
+          <h1 class="display">Dinamik cerrahi<br/>dental navigasyon</h1>
+          <p class="lead">İmplant ve lokal anestezi uygulamalarında; yapay zekâ tabanlı anatomik segmentasyon, gerçek zamanlı optik takip ve karma gerçeklik görselleştirmesini tek platformda birleştiren navigasyon sistemi.</p>
+        </div>
+      </div>
+      <div class="wrap hero-metrics">
+        <div class="metric"><span class="metric-k">Ortalama Dice — nnU-Net v2</span><span class="metric-v">0,7405</span></div>
+        <div class="metric"><span class="metric-k">Navigasyon takip frekansı</span><span class="metric-v">60 Hz</span></div>
+        <div class="metric"><span class="metric-k">Uçtan uca gecikme</span><span class="metric-v">&lt;50 ms</span></div>
+        <div class="metric"><span class="metric-k">Segmente anatomik yapı</span><span class="metric-v">8</span></div>
+      </div>
+    </section>
+
+    <!-- ANATOMY — dark chapter -->
+    <section class="stage" id="anatomi" data-theme="dark">
+      <div class="wrap">
+        <div class="stage-panel">
+          <p class="eyebrow">01 — Gerçek segmentasyon çıktısı</p>
+          <h2 class="h2">Bu çene bir çizim değil.</h2>
+          <p class="body">Ekrandaki model, gerçek bir CBCT hacminden nnU-Net v2 modelimizin ürettiği segmentasyon maskesinden birebir yeniden inşa edildi. Alt çene, üst çene, dişler, sinir kanalı ve maksiller sinüs ayrı ayrı etiketlendi.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="stage" data-theme="dark">
+      <div class="wrap">
+        <div class="stage-panel">
+          <p class="eyebrow danger">02 — Kritik yapı</p>
+          <h2 class="h2">Alt alveolar sinir kanalı.</h2>
+          <p class="body">İmplantın mandibular kanala 1 mm'den az mesafede yerleştirilmesi durumunda nörosensöryel bozukluklar kaçınılmazdır. Sistem bu güzergâhı segmente eder ve 2 mm güvenlik eşiğinde otomatik uyarı üretir.</p>
+          <p class="cite">Peña-Cardelles vd., 2025 — Med Oral Patol Oral Cir Bucal</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="stage" data-theme="dark">
+      <div class="wrap">
+        <div class="stage-panel">
+          <p class="eyebrow info">03 — Maksiller sinüs</p>
+          <h2 class="h2">Üst çenenin risk bölgesi.</h2>
+          <p class="body">Maksilla cerrahisinde sinüs perforasyonu en sık görülen komplikasyondur. Sistem sinüs sınırını çıkarır ve 1,5 mm eşiğinde uyarır. Mevcut çözümlerin aksine mandibula ve maksilla tek platformda kapsanır.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROBLEM -->
+    <section class="sec" id="sorun" data-theme="light">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">04 — Sorun</p>
+          <h2 class="h2">Milimetrenin altında bir hata payı.</h2>
+        </header>
+        <div class="figures">
+          <div class="figure">
+            <span class="figure-v">3,5 milyar</span>
+            <p class="figure-d">insan ağız hastalıklarından etkileniyor.</p>
+            <span class="figure-s">WHO, 2022</span>
+          </div>
+          <div class="figure">
+            <span class="figure-v">Sıfır</span>
+            <p class="figure-d">Mevcut navigasyon sistemlerinin hiçbiri gerçek yapay zekâ içermiyor.</p>
+            <span class="figure-s">Xu vd., 2024 — npj Digital Medicine</span>
+          </div>
+          <div class="figure">
+            <span class="figure-v">Tanımsız</span>
+            <p class="figure-d">Lokal anestezi iğnesini takip eden bir sistem literatürde yok.</p>
+            <span class="figure-s">Tang vd., 2024 — J Dent Res</span>
+          </div>
+          <div class="figure">
+            <span class="figure-v">%75–85</span>
+            <p class="figure-d">Tıbbi cihaz pazarında ithalat bağımlılığı; alanda yerli ürün yok.</p>
+            <span class="figure-s">Nexdigm, 2025</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ÖZGÜNLÜK -->
+    <section class="sec" id="ozgunluk" data-theme="light">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">05 — Özgünlük</p>
+          <h2 class="h2">Dört yapısal boşluk,<br/>eş zamanlı kapatılıyor.</h2>
+        </header>
+        <ol class="listing">
+          <li>
+            <span class="listing-n">01</span>
+            <div class="listing-b">
+              <h3>Gerçek yapay zekâ entegrasyonu</h3>
+              <p>nnU-Net v2 ile dört anatomik yapıyı eş zamanlı segmente eden ilk navigasyon sistemi.</p>
+            </div>
+          </li>
+          <li>
+            <span class="listing-n">02</span>
+            <div class="listing-b">
+              <h3>Lokal anestezi iğnesi takibi</h3>
+              <p>Mental ve infraorbital foramen çevresinde 3 mm güvenlik yarıçapı — literatürde ilk.</p>
+            </div>
+          </li>
+          <li>
+            <span class="listing-n">03</span>
+            <div class="listing-b">
+              <h3>Çift çene hibrit güvenlik</h3>
+              <p>Mandibula ve maksilla cerrahisini tek platformda kapsayan güvenlik algoritması.</p>
+            </div>
+          </li>
+          <li>
+            <span class="listing-n">04</span>
+            <div class="listing-b">
+              <h3>İntraoperatif kemik yoğunluğu</h3>
+              <p>HU tabanlı Misch D1–D4 sınıflaması ve bölgeye özgü implant protokol önerisi.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- MİMARİ -->
+    <section class="sec" id="mimari" data-theme="light">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">06 — Sistem mimarisi</p>
+          <h2 class="h2">Üç katmanlı hibrit yapı.</h2>
+        </header>
+        <div class="layers">
+          <article class="layer">
+            <span class="layer-n">Katman 1</span>
+            <div class="layer-b">
+              <h3>Python · nnU-Net v2</h3>
+              <p>Derin öğrenme tabanlı anatomik segmentasyon ve Hounsfield birimi kemik yoğunluğu analizi.</p>
+            </div>
+            <span class="layer-t">PyTorch · SimpleITK · ONNX / TensorRT</span>
+          </article>
+          <div class="layer-link"><span>JSON · ZeroMQ</span></div>
+          <article class="layer">
+            <span class="layer-n">Katman 2</span>
+            <div class="layer-b">
+              <h3>C++ navigasyon motoru</h3>
+              <p>NDI Polaris optik takip sisteminden 60 Hz konum verisi; hibrit güvenlik eşiği kontrolü.</p>
+            </div>
+            <span class="layer-t">NDICAPI · 60 Hz · Güvenlik algoritması</span>
+          </article>
+          <div class="layer-link"><span>UDP · Port 5555</span></div>
+          <article class="layer">
+            <span class="layer-n">Katman 3</span>
+            <div class="layer-b">
+              <h3>Unity · MRTK3 · HoloLens 2</h3>
+              <p>Holografik katmanları cerrahın görüş alanına yansıtan karma gerçeklik arayüzü.</p>
+            </div>
+            <span class="layer-t">MRTK3 · Radial View · &lt;50 ms</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- YAPAY ZEKA -->
+    <section class="sec" id="yapayzeka" data-theme="light">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">07 — Yapay zekâ segmentasyonu</p>
+          <h2 class="h2">nnU-Net v2 ile eğitilmiş model.</h2>
+          <p class="lead">MICCAI 2024 ToothFairy2 veri seti üzerinde eğitilen model, gerçek CBCT hacimlerinde mandibula, maksilla, dişler, sinir kanalı ve sinüsü ayrıştırır.</p>
+        </header>
+        <div class="ai-grid">
+          <div class="table-scroll">
+          <table class="table">
+            <caption>Doğrulama Dice katsayısı — fold 0</caption>
+            <tbody>
+              <tr><th>Genel ortalama</th><td class="bar-c"><span class="bar" style="--v:74"></span></td><td class="num">0,7405</td></tr>
+              <tr><th>Mandibula</th><td class="bar-c"><span class="bar" style="--v:92"></span></td><td class="num">0,92</td></tr>
+              <tr><th>Maksilla</th><td class="bar-c"><span class="bar" style="--v:88"></span></td><td class="num">0,88</td></tr>
+              <tr><th>Sinir kanalı</th><td class="bar-c"><span class="bar" style="--v:83"></span></td><td class="num">0,83</td></tr>
+              <tr><th>Dentisyon</th><td class="bar-c"><span class="bar" style="--v:90"></span></td><td class="num">0,90</td></tr>
+            </tbody>
+          </table>
+          </div>
+          <dl class="specs">
+            <div><dt>Veri seti</dt><dd>ToothFairy2 · 480 CBCT hacmi</dd></div>
+            <div><dt>Sınıf sayısı</dt><dd>8 anatomik yapı</dd></div>
+            <div><dt>Mimari</dt><dd>3D fullres · 100 epoch</dd></div>
+            <div><dt>Donanım</dt><dd>RTX 5070 Ti · 16 GB</dd></div>
+            <div><dt>Doğrulama</dt><dd>3D Slicer · gerçek CBCT</dd></div>
+          </dl>
+        </div>
+        <figure class="shot wide shot-top">
+          <img src="/img/slicer.png" alt="3D Slicer üzerinde nnU-Net segmentasyon çıktısı" loading="lazy" />
+          <figcaption>3D Slicer — modelin gerçek CBCT hacmi üzerindeki çıktısı: aksiyel, koronal ve sagital kesitlerde etiketlenmiş yapılar ve üç boyutlu yeniden yapılandırma</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- KARMA GERÇEKLİK / HOLOLENS -->
+    <section class="sec" id="hololens" data-theme="dark">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">08 — Karma gerçeklik katmanı</p>
+          <h2 class="h2">Cerrahın görüş alanında,<br/>adım adım.</h2>
+          <p class="lead">HoloLens 2 üzerinde Unity ve MRTK3 ile geliştirilen arayüz, kontrol istasyonundan UDP ile gelen adım verisini holografik panel olarak gösterir. Panel, MRTK3 Radial View bileşeniyle cerrahın bakışını yumuşak biçimde takip eder.</p>
+        </header>
+
+        <div class="device" id="deviceStage">
+          <canvas id="deviceCanvas" tabindex="0" role="img"
+                  aria-label="Microsoft HoloLens 2 üç boyutlu modeli — sürükleyerek döndürebilirsiniz"></canvas>
+          <p class="device-cap"><span class="device-hint">Sürükleyerek çevirin</span>Microsoft HoloLens 2 — hedef donanım</p>
+        </div>
+
+        <figure class="shot wide">
+          <img src="/img/mr_headset.png" alt="Gözlükten görünen holografik adım paneli" loading="lazy" />
+          <figcaption>Başlık içinden görünüm — el takibi etkin, holografik adım paneli operasyon alanının üzerinde asılı</figcaption>
+        </figure>
+
+        <figure class="shot wide">
+          <img src="/img/mr_sync.png" alt="Gözlük ve kontrol istasyonu aynı adımda senkron" loading="lazy" />
+          <figcaption><b>Canlı senkronizasyon.</b> Solda başlık görüntüsü, sağda masaüstü kontrol istasyonu — ikisi de aynı anda Adım 2/10 “CBCT Verisinin Doğrulanması” ekranında. İstasyonda “İleri”ye basıldığı anda başlıktaki panel güncellenir.</figcaption>
+        </figure>
+
+        <div class="shot-pair">
+          <figure class="shot">
+            <img src="/img/step_first.png" alt="Adım 1/10 — Hasta hazırlığı ve pozisyonlama" loading="lazy" />
+            <figcaption>Adım 1/10 — prosedürün başı</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="/img/step_last.png" alt="Adım 10/10 — Sütur ve kapanış" loading="lazy" />
+            <figcaption>Adım 10/10 — son adımda operasyon kaydı kapatılır</figcaption>
+          </figure>
+        </div>
+
+      </div>
+
+      <!-- full-bleed cinematic record -->
+      <div class="reel" id="reel">
+        <video class="reel-bg" id="reelLoop" autoplay muted loop playsinline preload="metadata" poster="/img/vr-poster.jpg" aria-hidden="true">
+          <source src="/video/vr-loop.mp4" type="video/mp4" />
+        </video>
+        <video class="reel-full" id="reelFull" controls playsinline preload="none" poster="/img/vr-poster.jpg">
+          <source src="/video/vr.mp4" type="video/mp4" />
+          Tarayıcınız video etiketini desteklemiyor.
+        </video>
+        <div class="reel-scrim" id="reelScrim">
+          <div class="reel-copy">
+            <p class="eyebrow danger">Güvenlik uyarısı — canlı kayıt</p>
+            <h3 class="reel-title">Eşik aşıldığında<br/>sistem cerrahı uyarır.</h3>
+            <p class="reel-sub">Pilot delik açılırken alt alveolar sinir kanalına 2 mm'lik güvenlik eşiği altında yaklaşıldığında, uyarı hem başlıktaki holografik panelde hem de kontrol istasyonunda eş zamanlı belirir.</p>
+            <button class="reel-btn" id="reelPlay" type="button">
+              <span class="reel-btn-icon" aria-hidden="true"></span>
+              Tam kaydı izle — 1:30
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrap">
+        <p class="reel-note">Kayıt, sistemin uçtan uca çalışan hâlidir: prosedür seçiminden sütur ve kapanışa kadar 10 adım, başlık ve kontrol istasyonu eş zamanlı.</p>
+      </div>
+    </section>
+
+    <!-- ARAYÜZ -->
+    <section class="sec" id="arayuz" data-theme="light">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">09 — Klinik kontrol arayüzü</p>
+          <h2 class="h2">Masaüstü kontrol istasyonu.</h2>
+          <p class="lead">C# / WPF · MVVM ile geliştirilen; SQLite hasta yönetimi, prosedür editörü, DICOM önizleme ve AES-256 alan şifrelemesi içeren uygulamanın gerçek ekranları.</p>
+        </header>
+        <figure class="shot wide">
+          <img src="/img/wpf_main.png" alt="Kontrol istasyonu ana ekranı" loading="lazy" />
+          <figcaption>Ana ekran — hasta listesi, kayıt formu ve üst çubukta canlı ağ yayını durumu (Port 5555)</figcaption>
+        </figure>
+        <div class="shot-pair">
+          <figure class="shot">
+            <img src="/img/wpf_procedure.png" alt="Prosedür ve adım yönetimi ekranı" loading="lazy" />
+            <figcaption>Prosedür ve adım yönetimi — tam CRUD, referans bütünlüğü koruması</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="/img/wpf_step.png" alt="Prosedür seçim ekranı" loading="lazy" />
+            <figcaption>Hasta bazlı prosedür seçimi ve tomografi bağlama</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- HASSASİYET -->
+    <section class="sec" id="hassasiyet" data-theme="light">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">10 — Hedef hassasiyet</p>
+          <h2 class="h2">Klinik kabul sınırının altında.</h2>
+        </header>
+        <div class="table-scroll table-full">
+        <table class="table">
+          <thead>
+            <tr><th>Metrik</th><th class="num">Hedefimiz</th><th class="num">Literatür ort.</th><th class="num">Klinik kabul sınırı</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>Giriş noktası sapması</th><td class="num strong">≤ 1,0 mm</td><td class="num">1,11 mm</td><td class="num">≤ 1,5 mm</td></tr>
+            <tr><th>Apeks noktası sapması</th><td class="num strong">≤ 1,2 mm</td><td class="num">1,40 mm</td><td class="num">≤ 2,0 mm</td></tr>
+            <tr><th>Açısal sapma</th><td class="num strong">≤ 3,0°</td><td class="num">3,51°</td><td class="num">≤ 5,0°</td></tr>
+            <tr><th>Uçtan uca gecikme</th><td class="num strong">≤ 50 ms</td><td class="num">—</td><td class="num">≤ 100 ms</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <div class="table-scroll table-full">
+        <table class="table">
+          <thead>
+            <tr><th>Güvenlik eşiği</th><th class="num">Mesafe</th><th class="num">Hedef duyarlılık</th><th class="num">Hedef özgüllük</th></tr>
+          </thead>
+          <tbody>
+            <tr><th><span class="swatch danger"></span>Mandibular sinir kanalı</th><td class="num strong">2,0 mm</td><td class="num">≥ %95</td><td class="num">≥ %98</td></tr>
+            <tr><th><span class="swatch info"></span>Maksiller sinüs</th><td class="num strong">1,5 mm</td><td class="num">≥ %95</td><td class="num">≥ %98</td></tr>
+            <tr><th><span class="swatch"></span>Foramen — iğne yarıçapı</th><td class="num strong">3,0 mm</td><td class="num">≥ %95</td><td class="num">≥ %95</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- KÜNYE -->
+    <footer class="sec credits" id="ekip" data-theme="light">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">Künye</p>
+          <h2 class="h2 title-long">Dental İmplantoloji ve Lokal Anestezide 3B Tomografi Entegrasyonlu Dinamik Cerrahi Navigasyon Sistemi</h2>
+        </header>
+        <div class="team">
+          <div class="person">
+            <h3>Noor Ahmed Hussein AL-GBURİ</h3>
+            <p>Takım Kaptanı · Proje Yürütücüsü — Klinik Araştırma ve Cerrahi Protokol</p>
+            <span>Klinik gereksinim analizi, cerrahi iş akışı tasarımı, anatomik etiketleme ve doğrulama · İstanbul Gelişim Üniversitesi, Diş Hekimliği Fakültesi öğrencisi</span>
+          </div>
+          <div class="person">
+            <h3>Yousif Mustafa Hamid ALRAMDHAN</h3>
+            <p>Yazılım Mimarisi ve Geliştirme</p>
+            <span>Karma gerçeklik arayüzü, klinik kontrol istasyonu ve yapay zekâ segmentasyon hattı · Bartın Üniversitesi, Bilgisayar Mühendisliği öğrencisi</span>
+          </div>
+        </div>
+        <div class="foot">
+          <span>GençBiyo</span>
+          <span>TÜBİTAK 2242 Üniversite Öğrencileri Araştırma Proje Yarışması · 2026 Sağlık Kategorisi</span>
+        </div>
+        <p class="colophon">
+          HoloLens 2 üç boyutlu modeli: <a href="https://sketchfab.com/3d-models/hololens-2-3dd665394e6f4b62ba16338e55828ddd" target="_blank" rel="noopener noreferrer">“Hololens 2”</a>,
+          <a href="https://sketchfab.com/muertoHambre" target="_blank" rel="noopener noreferrer">Faber</a> tarafından —
+          <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a> lisansı altında kullanılmıştır.
+          Çene modeli, projenin kendi nnU-Net v2 segmentasyon çıktısından üretilmiştir.
+        </p>
+      </div>
+    </footer>
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
