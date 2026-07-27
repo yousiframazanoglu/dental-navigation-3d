@@ -121,6 +121,12 @@ body[data-theme="light"] .nav-brand img{filter:invert(1) contrast(1.4)}
 .nav-links a{font-size:13px;color:var(--mut);transition:color .25s}
 .nav-links a:hover{color:var(--fg)}
 .nav-meta{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--mut)}
+.nav-deck{
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;
+  color:var(--fg);border:1px solid var(--line);border-radius:999px;padding:8px 15px;
+  transition:border-color .25s,background-color .25s;white-space:nowrap;
+}
+.nav-deck:hover{border-color:var(--fg)}
 
 /* ---------- annotations ---------- */
 #annotations{position:fixed;inset:0;z-index:5;pointer-events:none}
