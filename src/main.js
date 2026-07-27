@@ -23,7 +23,10 @@ const creepTimer = setInterval(() => {
   setLoad(Math.max(creep, lastReal))
 }, 120)
 
-jaw.load('/models/jaw.glb?v=6', (p) => { lastReal = p * 0.95; setLoad(Math.max(creep, lastReal)) })
+// runtime URLs must carry the deploy base — Vite only rewrites markup, not JS strings
+const BASE = import.meta.env.BASE_URL
+
+jaw.load(`${BASE}models/jaw.glb?v=6`, (p) => { lastReal = p * 0.95; setLoad(Math.max(creep, lastReal)) })
   .then(() => {
     clearInterval(creepTimer)
     setLoad(1)
@@ -89,7 +92,7 @@ document.querySelectorAll('.rv').forEach((el) => revealIO.observe(el))
 
 /* ---------- HoloLens viewer (lazy, renders only while on screen) ---------- */
 const deviceCanvas = document.getElementById('deviceCanvas')
-const device = deviceCanvas ? new DeviceViewer(deviceCanvas, '/models/hololens.glb') : null
+const device = deviceCanvas ? new DeviceViewer(deviceCanvas, `${BASE}models/hololens.glb`) : null
 if (import.meta.env.DEV) window.__device = device
 if (device) {
   const stage = document.getElementById('deviceStage')
