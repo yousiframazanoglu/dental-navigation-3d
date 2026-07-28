@@ -145,12 +145,12 @@
         <div class="split-img">
           <div>
             <div class="figs four tight">
-              <div><b>0,7405</b><p>ortalama doğrulama Dice</p><span>fold 0 · 100 epoch</span></div>
+              <div><b>0,8823</b><p>ortalama Dice</p><span>tam etiketli 15 vaka</span></div>
+              <div><b>0,8636</b><p>alt alveoler kanal</p><span>kritik güvenlik yapısı</span></div>
               <div><b>480</b><p>CBCT hacmi</p><span>ToothFairy2 · MICCAI 2024</span></div>
-              <div><b>8</b><p>hedef anatomik sınıf</p><span>42 FDI sınıfından haritalandı</span></div>
               <div><b>3,5 sa</b><p>eğitim süresi</p><span>3d_fullres · RTX 5070 Ti</span></div>
             </div>
-            <p class="note">Segmente edilen yapılar: alt çene · üst çene · inferior alveoler kanal · maksiller sinüs · üst dişler · alt dişler · farenks</p>
+            <p class="note"><b>Ölçüm notu:</b> doğrulama kümesinin tamamında ortalama 0,7405'tir. Fark modelden değil referans etiketlerden gelir — kısmi etiketli hacimlerde işaretlenmemiş yapılar için Dice sıfır yazılır (maksiller sinüste 13 vakanın 12'si). Her iki değer de raporlanır.</p>
           </div>
           <figure><img src="/img/slicer.png" alt="3D Slicer segmentasyon çıktısı" /><figcaption>3D Slicer — gerçek CBCT üzerinde model tahmini</figcaption></figure>
         </div>
@@ -238,7 +238,7 @@
           <div class="done">
             <h3><i>✓</i>Tamamlandı ve çalışıyor</h3>
             <ul>
-              <li>nnU-Net v2 modeli eğitildi — 0,7405 ortalama Dice</li>
+              <li>nnU-Net v2 modeli eğitildi — tam etiketli vakalarda 0,8823 ortalama Dice</li>
               <li>Gerçek CBCT üzerinde tahmin çalıştırıldı, 3D Slicer'da doğrulandı</li>
               <li>WPF klinik uygulaması: hasta, prosedür ve adım yönetimi</li>
               <li>DICOM/CBCT önizleme, PDF klinik rapor üretimi</li>
@@ -288,15 +288,15 @@
     <section class="slide">
       <div class="pad">
         <p class="eyebrow">16 — Takvim</p>
-        <h2 class="d2">Şubat – Haziran 2026.</h2>
+        <h2 class="d2">Şubat – Ağustos 2026.</h2>
         <div class="timeline">
-          <div class="ok"><b>Şubat</b><p>Literatür taraması, etik kurul başvurusu, veri toplama protokolü, geliştirme ortamı</p></div>
-          <div class="ok"><b>Mart</b><p>Anonimleştirme ve NIfTI dönüşümü, anatomik etiketleme ve ICC doğrulaması</p></div>
-          <div class="ok"><b>Nisan</b><p>nnU-Net v2 eğitimi, HU analiz modülü, C++ navigasyon çekirdeği, NDI API</p></div>
-          <div class="ok"><b>Mayıs</b><p>Unity/MRTK3 arayüzü, kalibrasyon, UDP entegrasyonu, uçtan uca test</p></div>
-          <div class="now"><b>Haziran</b><p>SLA fantom doğrulama, sapma analizi, patent başvurusu, final raporu</p></div>
+          <div class="ok"><b>Şubat – Mart</b><p>Literatür taraması, etik kurul başvurusu, veri hazırlama, anatomik etiketleme ve ICC doğrulaması</p></div>
+          <div class="ok"><b>Nisan – Mayıs</b><p>nnU-Net v2 eğitimi, HU analiz modülü, C++ navigasyon çekirdeği, Unity/MRTK3 arayüzü</p></div>
+          <div class="ok"><b>Haziran</b><p>Uçtan uca entegrasyon, masaüstü ↔ gözlük UDP veri akışının doğrulanması</p></div>
+          <div class="ok"><b>Temmuz</b><p>Model eğitiminin tamamlanması, gerçek CBCT üzerinde doğrulama, sonuçların analizi</p></div>
+          <div class="now"><b>Ağustos</b><p>NDI Polaris entegrasyonu, SLA fantom doğrulama, sapma analizi, patent başvurusu</p></div>
         </div>
-        <p class="note">Beş aylık takvimin dört ayı tamamlandı. Haziran ayı fantom doğrulama ve final teslimine ayrıldı.</p>
+        <p class="note">Yazılım ve yapay zekâ katmanları tamamlandı ve çalışır durumda. Sıradaki aşama optik takip entegrasyonu ve fantom model üzerinde sapma ölçümleridir.</p>
       </div>
     </section>
 

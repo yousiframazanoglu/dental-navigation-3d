@@ -214,6 +214,17 @@ body[data-theme="light"] .nav-brand img{filter:invert(1) contrast(1.4)}
 .bar{display:block;height:2px;background:var(--line);position:relative}
 .bar::after{content:"";position:absolute;left:0;top:0;height:100%;width:0;background:var(--fg);transition:width 1s cubic-bezier(.22,.7,.25,1)}
 .bar.run::after{width:calc(var(--v)*1%)}
+.bar.danger::after{background:var(--danger)}
+.mono{font-family:'JetBrains Mono',monospace;font-size:.92em}
+
+/* measurement caveat — stated plainly rather than buried */
+.finding{
+  margin-top:clamp(30px,4vw,52px);border-left:2px solid var(--danger);
+  padding:4px 0 4px clamp(18px,2vw,28px);max-width:92ch;
+}
+.finding .eyebrow{margin-bottom:12px}
+.finding p{font-size:14.5px;line-height:1.65;color:var(--mut)}
+.finding p b{color:var(--fg);font-weight:500}
 .swatch{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--mut);margin-right:10px;vertical-align:middle}
 .swatch.danger{background:var(--danger)}
 .swatch.info{background:var(--info)}

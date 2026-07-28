@@ -215,28 +215,40 @@
         <header class="sec-head">
           <p class="eyebrow">07 — Yapay zekâ segmentasyonu</p>
           <h2 class="h2">nnU-Net v2 ile eğitilmiş model.</h2>
-          <p class="lead">MICCAI 2024 ToothFairy2 veri seti üzerinde eğitilen model, gerçek CBCT hacimlerinde mandibula, maksilla, dişler, sinir kanalı ve sinüsü ayrıştırır.</p>
+          <p class="lead">MICCAI 2024 ToothFairy2 veri seti üzerinde eğitilen model, gerçek CBCT hacimlerinde mandibula, maksilla, dişler, sinir kanalı ve sinüsü ayrıştırır. Aşağıdaki değerlerin tamamı, eğitimin ürettiği doğrulama çıktısından (<span class="mono">summary.json</span>, 96 vaka) okunmuştur.</p>
         </header>
         <div class="ai-grid">
           <div class="table-scroll">
           <table class="table">
-            <caption>Doğrulama Dice katsayısı — fold 0</caption>
+            <caption>Sınıf bazında Dice — tam etiketli 15 doğrulama vakası</caption>
             <tbody>
-              <tr><th>Genel ortalama</th><td class="bar-c"><span class="bar" style="--v:74"></span></td><td class="num">0,7405</td></tr>
-              <tr><th>Mandibula</th><td class="bar-c"><span class="bar" style="--v:92"></span></td><td class="num">0,92</td></tr>
-              <tr><th>Maksilla</th><td class="bar-c"><span class="bar" style="--v:88"></span></td><td class="num">0,88</td></tr>
-              <tr><th>Sinir kanalı</th><td class="bar-c"><span class="bar" style="--v:83"></span></td><td class="num">0,83</td></tr>
-              <tr><th>Dentisyon</th><td class="bar-c"><span class="bar" style="--v:90"></span></td><td class="num">0,90</td></tr>
+              <tr><th>Alt çene (mandibula)</th><td class="bar-c"><span class="bar" style="--v:97.6"></span></td><td class="num">0,9762</td></tr>
+              <tr><th>Farenks</th><td class="bar-c"><span class="bar" style="--v:97.4"></span></td><td class="num">0,9739</td></tr>
+              <tr><th>Alt dişler</th><td class="bar-c"><span class="bar" style="--v:89"></span></td><td class="num">0,8898</td></tr>
+              <tr><th>Üst çene (maksilla)</th><td class="bar-c"><span class="bar" style="--v:88.2"></span></td><td class="num">0,8816</td></tr>
+              <tr><th>Üst dişler</th><td class="bar-c"><span class="bar" style="--v:86.5"></span></td><td class="num">0,8650</td></tr>
+              <tr><th>Alt alveoler kanal</th><td class="bar-c"><span class="bar danger" style="--v:86.4"></span></td><td class="num">0,8636</td></tr>
+              <tr><th>Maksiller sinüs</th><td class="bar-c"><span class="bar" style="--v:72.6"></span></td><td class="num">0,7257</td></tr>
+              <tr><th><b>Ortalama</b></th><td class="bar-c"></td><td class="num strong">0,8823</td></tr>
             </tbody>
           </table>
           </div>
           <dl class="specs">
             <div><dt>Veri seti</dt><dd>ToothFairy2 · 480 CBCT hacmi</dd></div>
-            <div><dt>Sınıf sayısı</dt><dd>8 anatomik yapı</dd></div>
+            <div><dt>Hedef sınıf</dt><dd>7 anatomik yapı</dd></div>
             <div><dt>Mimari</dt><dd>3D fullres · 100 epoch</dd></div>
-            <div><dt>Donanım</dt><dd>RTX 5070 Ti · 16 GB</dd></div>
-            <div><dt>Doğrulama</dt><dd>3D Slicer · gerçek CBCT</dd></div>
+            <div><dt>Eğitim süresi</dt><dd>3,5 saat · RTX 5070 Ti</dd></div>
+            <div><dt>En iyi EMA</dt><dd>0,9044 pseudo-Dice</dd></div>
           </dl>
+        </div>
+
+        <div class="finding">
+          <p class="eyebrow danger">Ölçüm notu</p>
+          <p>Doğrulama kümesinin tamamında ortalama Dice <b>0,7405</b> ölçülür. Aradaki fark modelden değil,
+          referans etiketlerden kaynaklanır: ToothFairy2'nin kısmi etiketli hacimlerinde bazı yapılar
+          hiç işaretlenmemiştir; model doğru tahmin üretse dahi Dice sıfır yazılır. Maksiller sinüste
+          13 kısmi vakanın 12'si, üst çenede 56 vakanın 35'i tam sıfırdır. Bu nedenle tabloda
+          <b>tam etiketli 15 vaka</b> raporlanmıştır; her iki değer de burada açıkça verilmektedir.</p>
         </div>
         <figure class="shot wide shot-top">
           <img src="/img/slicer.png" alt="3D Slicer üzerinde nnU-Net segmentasyon çıktısı" loading="lazy" />
