@@ -90,6 +90,14 @@ const revealIO = new IntersectionObserver((entries) => {
 }, { threshold: 0.15, rootMargin: '0px 0px -6% 0px' })
 document.querySelectorAll('.rv').forEach((el) => revealIO.observe(el))
 
+/* ---------- charts: inject the SVG so the page webfonts apply to its labels ---------- */
+document.querySelectorAll('.chart[data-src]').forEach((fig) => {
+  fetch(BASE + fig.dataset.src)
+    .then((r) => (r.ok ? r.text() : Promise.reject(new Error(r.status))))
+    .then((svg) => fig.insertAdjacentHTML('afterbegin', svg))
+    .catch((e) => console.error('chart failed:', fig.dataset.src, e))
+})
+
 /* ---------- HoloLens viewer (lazy, renders only while on screen) ---------- */
 const deviceCanvas = document.getElementById('deviceCanvas')
 const device = deviceCanvas ? new DeviceViewer(deviceCanvas, `${BASE}models/hololens.glb`) : null

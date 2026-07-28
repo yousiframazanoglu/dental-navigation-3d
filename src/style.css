@@ -217,6 +217,18 @@ body[data-theme="light"] .nav-brand img{filter:invert(1) contrast(1.4)}
 .bar.danger::after{background:var(--danger)}
 .mono{font-family:'JetBrains Mono',monospace;font-size:.92em}
 
+/* charts are injected inline (not <img>) so the page webfonts apply to them */
+.charts{
+  display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,56px);
+  margin-top:clamp(40px,5vw,72px);
+}
+.chart svg{width:100%;height:auto;display:block}
+.chart figcaption{
+  font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mut);
+  padding-top:14px;line-height:1.7;border-top:1px solid var(--line-soft);margin-top:16px;
+}
+@media(max-width:900px){ .charts{grid-template-columns:1fr} }
+
 /* measurement caveat — stated plainly rather than buried */
 .finding{
   margin-top:clamp(30px,4vw,52px);border-left:2px solid var(--danger);
