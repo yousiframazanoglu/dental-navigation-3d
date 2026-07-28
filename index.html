@@ -6,6 +6,23 @@
   <title>Dental Navigasyon — Dinamik Cerrahi Navigasyon Sistemi</title>
   <meta name="description" content="Yapay zekâ destekli anatomik segmentasyon, gerçek zamanlı optik takip ve karma gerçeklik görselleştirmesini tek platformda birleştiren dinamik cerrahi dental navigasyon sistemi." />
   <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="canonical" href="https://yousiframazanoglu.github.io/dental-navigation-3d/" />
+
+  <!-- paylaşım kartı: absolute URL şart, göreli yol önizlemede çözülmez -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Dental Navigasyon" />
+  <meta property="og:locale" content="tr_TR" />
+  <meta property="og:url" content="https://yousiframazanoglu.github.io/dental-navigation-3d/" />
+  <meta property="og:title" content="Dinamik Cerrahi Dental Navigasyon Sistemi" />
+  <meta property="og:description" content="Gerçek CBCT hacminden nnU-Net v2 ile segmentasyon, HoloLens 2 karma gerçeklik arayüzü ve 2 mm güvenlik eşiğinde otomatik uyarı. TÜBİTAK 2242 — GençBiyo." />
+  <meta property="og:image" content="https://yousiframazanoglu.github.io/dental-navigation-3d/og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Gerçek segmentasyondan üretilmiş üç boyutlu çene modeli" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Dinamik Cerrahi Dental Navigasyon Sistemi" />
+  <meta name="twitter:description" content="Yapay zekâ destekli çift çene cerrahi navigasyon — TÜBİTAK 2242, GençBiyo." />
+  <meta name="twitter:image" content="https://yousiframazanoglu.github.io/dental-navigation-3d/og.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -220,16 +237,16 @@
         <div class="ai-grid">
           <div class="table-scroll">
           <table class="table">
-            <caption>Sınıf bazında Dice — tam etiketli 15 doğrulama vakası</caption>
+            <caption>Sınıf bazında Dice — yapının referansta etiketli olduğu vakalar</caption>
             <tbody>
-              <tr><th>Alt çene (mandibula)</th><td class="bar-c"><span class="bar" style="--v:97.6"></span></td><td class="num">0,9762</td></tr>
-              <tr><th>Farenks</th><td class="bar-c"><span class="bar" style="--v:97.4"></span></td><td class="num">0,9739</td></tr>
-              <tr><th>Alt dişler</th><td class="bar-c"><span class="bar" style="--v:89"></span></td><td class="num">0,8898</td></tr>
-              <tr><th>Üst çene (maksilla)</th><td class="bar-c"><span class="bar" style="--v:88.2"></span></td><td class="num">0,8816</td></tr>
-              <tr><th>Üst dişler</th><td class="bar-c"><span class="bar" style="--v:86.5"></span></td><td class="num">0,8650</td></tr>
-              <tr><th>Alt alveoler kanal</th><td class="bar-c"><span class="bar danger" style="--v:86.4"></span></td><td class="num">0,8636</td></tr>
-              <tr><th>Maksiller sinüs</th><td class="bar-c"><span class="bar" style="--v:72.6"></span></td><td class="num">0,7257</td></tr>
-              <tr><th><b>Ortalama</b></th><td class="bar-c"></td><td class="num strong">0,8823</td></tr>
+              <tr><th>Alt çene (mandibula) <span class="n-of">n=96</span></th><td class="bar-c"><span class="bar" style="--v:98.5"></span></td><td class="num">0,9845</td></tr>
+              <tr><th>Farenks <span class="n-of">n=96</span></th><td class="bar-c"><span class="bar" style="--v:96.4"></span></td><td class="num">0,9636</td></tr>
+              <tr><th>Alt dişler <span class="n-of">n=90</span></th><td class="bar-c"><span class="bar" style="--v:92"></span></td><td class="num">0,9195</td></tr>
+              <tr><th>Üst dişler <span class="n-of">n=69</span></th><td class="bar-c"><span class="bar" style="--v:90"></span></td><td class="num">0,8996</td></tr>
+              <tr><th>Maksiller sinüs <span class="n-of">n=13</span></th><td class="bar-c"><span class="bar" style="--v:87.4"></span></td><td class="num">0,8742</td></tr>
+              <tr><th>Alt alveoler kanal <span class="n-of">n=96</span></th><td class="bar-c"><span class="bar danger" style="--v:85.1"></span></td><td class="num">0,8511</td></tr>
+              <tr><th>Üst çene (maksilla) <span class="n-of">n=36</span></th><td class="bar-c"><span class="bar" style="--v:76.4"></span></td><td class="num">0,7635</td></tr>
+              <tr><th><b>Ortalama</b></th><td class="bar-c"></td><td class="num strong">0,8937</td></tr>
             </tbody>
           </table>
           </div>
@@ -254,10 +271,13 @@
         <div class="finding">
           <p class="eyebrow danger">Ölçüm notu</p>
           <p>Doğrulama kümesinin tamamında ortalama Dice <b>0,7405</b> ölçülür. Aradaki fark modelden değil,
-          referans etiketlerden kaynaklanır: ToothFairy2'nin kısmi etiketli hacimlerinde bazı yapılar
-          hiç işaretlenmemiştir; model doğru tahmin üretse dahi Dice sıfır yazılır. Maksiller sinüste
-          13 kısmi vakanın 12'si, üst çenede 56 vakanın 35'i tam sıfırdır. Bu nedenle tabloda
-          <b>tam etiketli 15 vaka</b> raporlanmıştır; her iki değer de burada açıkça verilmektedir.</p>
+          referans etiketlerin bütünlüğünden kaynaklanır: ToothFairy2 hacimlerinin bir kısmında bazı yapılar
+          hiç işaretlenmemiştir. Bu vakalarda model yapıyı doğru bulsa dahi karşılaştırılacak referans
+          bulunmadığı için Dice sıfır yazılır. Maksiller sinüs 96 vakanın yalnız <b>13'ünde</b>, üst çene
+          <b>36'sında</b> etiketlidir; model, etiketsiz vakaların 15'inde sinüsü yine de segmente etmiştir.</p>
+          <p style="margin-top:12px">Bu nedenle tabloda her yapı, <b>yalnızca referansta bulunduğu vakalar</b>
+          üzerinden raporlanmıştır — kısmi anotasyonlu veri setlerinde standart yaklaşım budur. Her iki değer de
+          burada açıkça verilmektedir.</p>
         </div>
         <figure class="shot wide shot-top">
           <img src="/img/slicer.png" alt="3D Slicer üzerinde nnU-Net segmentasyon çıktısı" loading="lazy" />

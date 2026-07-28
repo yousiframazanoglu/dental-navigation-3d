@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yousiframazanoglu.github.io/dental-navigation-3d/sitemap.xml

@@ -6,6 +6,12 @@
   <title>Dental Navigasyon — Sunum</title>
   <meta name="description" content="TÜBİTAK 2242 Dental İmplantoloji ve Lokal Anestezide Üç Boyutlu Tomografi Entegrasyonlu Dinamik Cerrahi Navigasyon Sistemi — sunum." />
   <link rel="icon" type="image/png" href="/favicon.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://yousiframazanoglu.github.io/dental-navigation-3d/sunum.html" />
+  <meta property="og:title" content="Dental Navigasyon — Sunum" />
+  <meta property="og:description" content="19 slaytlık sunum: gerçek segmentasyondan üretilmiş 3B çene modeli, HoloLens 2 arayüzü ve canlı güvenlik uyarısı kaydı." />
+  <meta property="og:image" content="https://yousiframazanoglu.github.io/dental-navigation-3d/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -145,12 +151,12 @@
         <div class="split-img">
           <div>
             <div class="figs four tight">
-              <div><b>0,8823</b><p>ortalama Dice</p><span>tam etiketli 15 vaka</span></div>
+              <div><b>0,8937</b><p>ortalama Dice</p><span>yapı etiketliyken</span></div>
               <div><b>0,8636</b><p>alt alveoler kanal</p><span>kritik güvenlik yapısı</span></div>
               <div><b>480</b><p>CBCT hacmi</p><span>ToothFairy2 · MICCAI 2024</span></div>
               <div><b>3,5 sa</b><p>eğitim süresi</p><span>3d_fullres · RTX 5070 Ti</span></div>
             </div>
-            <p class="note"><b>Ölçüm notu:</b> doğrulama kümesinin tamamında ortalama 0,7405'tir. Fark modelden değil referans etiketlerden gelir — kısmi etiketli hacimlerde işaretlenmemiş yapılar için Dice sıfır yazılır (maksiller sinüste 13 vakanın 12'si). Her iki değer de raporlanır.</p>
+            <p class="note"><b>Ölçüm notu:</b> doğrulama kümesinin tamamında ortalama 0,7405'tir. Fark modelden değil referans etiketlerin bütünlüğünden gelir — maksiller sinüs 96 vakanın yalnız 13'ünde, üst çene 36'sında etiketlidir; etiketsiz vakada model yapıyı doğru bulsa bile Dice sıfır yazılır. Tabloda her yapı yalnızca referansta bulunduğu vakalar üzerinden raporlanır. Her iki değer de verilir.</p>
           </div>
           <figure><img src="/img/slicer.png" alt="3D Slicer segmentasyon çıktısı" /><figcaption>3D Slicer — gerçek CBCT üzerinde model tahmini</figcaption></figure>
         </div>
@@ -190,7 +196,7 @@
               <li>Unity 2022 LTS + MRTK3 ile geliştirildi.</li>
               <li>Panel, baş hareketini yumuşak takip eder (Radial View).</li>
               <li>Adım başlığı, açıklama ve güvenlik uyarısı tek panelde.</li>
-              <li>Masaüstü ↔ gözlük UDP veri akışı uçtan uca doğrulandı.</li>
+              <li>Masaüstü ↔ gözlük UDP veri akışı uçtan uca doğrulandı (Unity XR simülatöründe).</li>
             </ul>
             <div class="mini"><span><b>HoloLens 2</b>MRTK3</span><span><b>60 Hz</b>optik takip</span><span><b>&lt;50 ms</b>gecikme</span></div>
           </div>
@@ -238,13 +244,13 @@
           <div class="done">
             <h3><i>✓</i>Tamamlandı ve çalışıyor</h3>
             <ul>
-              <li>nnU-Net v2 modeli eğitildi — tam etiketli vakalarda 0,8823 ortalama Dice</li>
+              <li>nnU-Net v2 modeli eğitildi — yapı etiketliyken 0,8937 ortalama Dice</li>
               <li>Gerçek CBCT üzerinde tahmin çalıştırıldı, 3D Slicer'da doğrulandı</li>
               <li>WPF klinik uygulaması: hasta, prosedür ve adım yönetimi</li>
               <li>DICOM/CBCT önizleme, PDF klinik rapor üretimi</li>
               <li>AES-256 şifreleme ve otomatik veritabanı yedekleme</li>
               <li>Unity/MRTK3 HUD paneli ve baş takip davranışı</li>
-              <li>Masaüstü ↔ gözlük UDP veri akışı uçtan uca doğrulandı</li>
+              <li>Masaüstü ↔ gözlük UDP veri akışı doğrulandı (Unity XR simülatöründe)</li>
             </ul>
           </div>
           <div class="next">
