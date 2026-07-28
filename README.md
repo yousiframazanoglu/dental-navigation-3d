@@ -2,7 +2,8 @@
 
 **Canlı site:** https://yousiframazanoglu.github.io/dental-navigation-3d/
 **Sunum:** https://yousiframazanoglu.github.io/dental-navigation-3d/sunum.html ·
-**English:** https://yousiframazanoglu.github.io/dental-navigation-3d/en.html
+**English:** https://yousiframazanoglu.github.io/dental-navigation-3d/en.html ·
+**العربية:** https://yousiframazanoglu.github.io/dental-navigation-3d/ar.html
 
 Dental implantoloji ve lokal anestezi uygulamalarında komplikasyon riskini azaltmayı hedefleyen,
 yapay zekâ destekli **dinamik cerrahi dental navigasyon sistemi**nin tanıtım sitesi ve üç boyutlu
@@ -69,13 +70,24 @@ Sitedeki çene modeli bir çizim ya da hazır varlık değil: projenin kendi seg
 (`.mha` maskesi) marching-cubes ile üretilmiştir. Üretim betiği: [`scripts/build_jaw.py`](scripts/build_jaw.py).
 
 ```
-index.html      Türkçe ana sayfa
-en.html         İngilizce sürüm
-sunum.html      19 slaytlık, klavyeyle gezilen sunum (3B modeller canlı)
-src/scene.js    three.js sahnesi — kaydırmaya bağlı kamera koreografisi
-src/device.js   HoloLens 2 modeli (sürüklenebilir)
-scripts/        segmentasyon maskesinden GLB üretimi
+index.html         Türkçe ana sayfa
+en.html            İngilizce sürüm
+ar.html            Arapça sürüm (dir="rtl")
+sunum.html         19 slaytlık, klavyeyle gezilen sunum (3B modeller canlı)
+src/scene.js       three.js sahnesi — kaydırmaya bağlı kamera koreografisi
+src/device.js      HoloLens 2 modeli (sürüklenebilir)
+src/rtl.css        sağdan sola katmanı — yalnız ar.html yükler
+scripts/build_jaw.py   segmentasyon maskesinden GLB üretimi
+scripts/charts.cjs     grafikleri tr/en/ar olarak üretir
 ```
+
+**Arapça sürüm hakkında.** `rtl.css`, IBM Plex Sans Arabic'i `unicode-range`
+ile mevcut Latin ailelerine ekler; böylece `style.css`'teki hiçbir seçici
+değişmeden Latin glifler Inter'de, Arapça glifler Plex Arabic'te render edilir.
+Arapça bitişik bir yazıdır: harf aralığı ve büyük harf dönüşümü kapatılır,
+satır aralığı artırılır. Sayılar ve birimler (`<50 ms` gibi) `direction:ltr`
+ile yalıtılır, yoksa ters okunur. Üç boyutlu sahnenin yatay kamera ofseti de
+aynalanır — metin sağda olduğu için çene sola geçer.
 
 ## Çalıştırma
 
