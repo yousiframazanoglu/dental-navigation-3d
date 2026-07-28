@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dental Navigation — Dynamic Surgical Navigation System</title>
-  <meta name="description" content="AI-based anatomical segmentation, real-time optical tracking and mixed-reality visualisation combined into a single dynamic surgical dental navigation platform." />
+  <title>3D Dental Navigation — AI-Powered Dynamic Surgical Navigation System</title>
+  <meta name="description" content="AI-powered 3D dental navigation: inferior alveolar canal and maxillary sinus segmentation from CBCT with nnU-Net v2, a HoloLens 2 mixed-reality interface and an automatic alert at a 2 mm safety margin." />
+  <meta name="keywords" content="3D dental navigation, dynamic surgical navigation, dental implant navigation, inferior alveolar canal segmentation, nnU-Net, CBCT segmentation, HoloLens 2 surgery, mixed reality dentistry" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <link rel="alternate" hreflang="x-default" href="https://yousiframazanoglu.github.io/dental-navigation-3d/" />
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="canonical" href="https://yousiframazanoglu.github.io/dental-navigation-3d/en.html" />
   <link rel="alternate" hreflang="tr" href="https://yousiframazanoglu.github.io/dental-navigation-3d/" />
@@ -22,6 +25,68 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/src/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ResearchProject",
+        "@id": "https://yousiframazanoglu.github.io/dental-navigation-3d/en.html#project",
+        "name": "Dynamic Surgical Navigation System with Three-Dimensional Tomography Integration for Dental Implantology and Local Anaesthesia",
+        "alternateName": "3D Dental Navigation",
+        "url": "https://yousiframazanoglu.github.io/dental-navigation-3d/en.html",
+        "description": "A dynamic surgical navigation system that segments the inferior alveolar canal, maxillary sinus and other anatomical structures from CBCT volumes with nnU-Net v2, tracks the instrument tip in real time and issues an automatic alert at a 2 mm safety margin, presented to the surgeon through a HoloLens 2 mixed-reality interface.",
+        "inLanguage": "en",
+        "keywords": "3D dental navigation, dynamic surgical navigation, dental implant navigation, inferior alveolar canal segmentation, mandibular canal, CBCT segmentation, nnU-Net v2, HoloLens 2, mixed reality, artificial intelligence in dentistry",
+        "funder": {
+          "@type": "Organization",
+          "name": "The Scientific and Technological Research Council of Türkiye",
+          "alternateName": "TÜBİTAK",
+          "url": "https://www.tubitak.gov.tr/"
+        },
+        "member": [
+          {
+            "@type": "Person",
+            "name": "Noor Ahmed Hussein AL-GBURİ",
+            "jobTitle": "Team Captain and Project Lead",
+            "affiliation": { "@type": "CollegeOrUniversity", "name": "Istanbul Gelisim University, Faculty of Dentistry" }
+          },
+          {
+            "@type": "Person",
+            "name": "Yousif Mustafa Hamid ALRAMDHAN",
+            "jobTitle": "Software Architecture and Development",
+            "affiliation": { "@type": "CollegeOrUniversity", "name": "Bartin University, Department of Computer Engineering" }
+          }
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://yousiframazanoglu.github.io/dental-navigation-3d/en.html#software",
+        "name": "3D Dental Navigation",
+        "applicationCategory": "MedicalApplication",
+        "operatingSystem": "Windows 10/11, HoloLens 2",
+        "url": "https://yousiframazanoglu.github.io/dental-navigation-3d/en.html",
+        "description": "AI-assisted surgical navigation software: nnU-Net v2 segmentation of seven anatomical structures from CBCT, 60 Hz optical tracking, HoloLens 2 mixed-reality guidance and an automatic alert at the 2 mm safety margin.",
+        "featureList": [
+          "Automatic segmentation of seven anatomical structures from CBCT with nnU-Net v2",
+          "Real-time inferior alveolar canal distance monitoring",
+          "Automatic alert at a 2 mm safety margin",
+          "HoloLens 2 mixed-reality holographic overlay",
+          "WPF desktop clinical control station"
+        ],
+        "isPartOf": { "@id": "https://yousiframazanoglu.github.io/dental-navigation-3d/en.html#project" }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://yousiframazanoglu.github.io/dental-navigation-3d/#website",
+        "url": "https://yousiframazanoglu.github.io/dental-navigation-3d/",
+        "name": "3D Dental Navigation",
+        "inLanguage": ["tr", "en"]
+      }
+    ]
+  }
+  </script>
 </head>
 <body data-theme="light">
   <canvas id="scene"></canvas>

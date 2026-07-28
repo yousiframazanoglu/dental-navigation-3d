@@ -3,8 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dental Navigasyon — Dinamik Cerrahi Navigasyon Sistemi</title>
-  <meta name="description" content="Yapay zekâ destekli anatomik segmentasyon, gerçek zamanlı optik takip ve karma gerçeklik görselleştirmesini tek platformda birleştiren dinamik cerrahi dental navigasyon sistemi." />
+  <title>3B Dental Navigasyon — Yapay Zekâ Destekli Dinamik Cerrahi Navigasyon Sistemi</title>
+  <meta name="description" content="Yapay zekâ destekli 3D dental navigasyon: CBCT hacminden nnU-Net v2 ile alt alveoler kanal ve maksiller sinüs segmentasyonu, HoloLens 2 karma gerçeklik arayüzü ve 2 mm güvenlik eşiğinde otomatik uyarı. TÜBİTAK 2242 projesi." />
+  <meta name="keywords" content="3D dental navigasyon, dental navigasyon sistemi, cerrahi navigasyon, implant navigasyon, alt alveoler kanal segmentasyonu, nnU-Net, CBCT segmentasyon, HoloLens 2 cerrahi, karma gerçeklik diş hekimliği, yapay zeka diş implantı" />
+  <meta name="author" content="GençBiyo" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <link rel="alternate" hreflang="tr" href="https://yousiframazanoglu.github.io/dental-navigation-3d/" />
+  <link rel="alternate" hreflang="en" href="https://yousiframazanoglu.github.io/dental-navigation-3d/en.html" />
+  <link rel="alternate" hreflang="x-default" href="https://yousiframazanoglu.github.io/dental-navigation-3d/" />
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="canonical" href="https://yousiframazanoglu.github.io/dental-navigation-3d/" />
 
@@ -27,6 +33,46 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/src/style.css" />
+
+  <!-- yapılandırılmış veri: arama motoruna bunun bir araştırma projesi olduğunu anlatır -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ResearchProject",
+        "@id": "https://yousiframazanoglu.github.io/dental-navigation-3d/#proje",
+        "name": "Dental İmplantoloji ve Lokal Anestezide Üç Boyutlu Tomografi Entegrasyonlu Dinamik Cerrahi Navigasyon Sistemi",
+        "alternateName": "3B Dental Navigasyon",
+        "url": "https://yousiframazanoglu.github.io/dental-navigation-3d/",
+        "description": "Yapay zekâ tabanlı anatomik segmentasyon, gerçek zamanlı optik takip ve karma gerçeklik görselleştirmesini tek platformda birleştiren, çift çene kapsamlı dinamik cerrahi dental navigasyon sistemi.",
+        "inLanguage": "tr",
+        "keywords": "dinamik cerrahi navigasyon, dental implantoloji, nnU-Net, CBCT segmentasyon, HoloLens 2, karma gerçeklik, alt alveoler kanal",
+        "funder": { "@type": "Organization", "name": "TÜBİTAK", "url": "https://tubitak.gov.tr" },
+        "member": [
+          { "@type": "Person", "name": "Noor Ahmed Hussein AL-GBURİ", "jobTitle": "Takım Kaptanı · Proje Yürütücüsü" },
+          { "@type": "Person", "name": "Yousif Mustafa Hamid ALRAMDHAN", "jobTitle": "Yazılım Mimarisi ve Geliştirme" }
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Dental Navigasyon",
+        "applicationCategory": "MedicalApplication",
+        "operatingSystem": "Windows, HoloLens 2",
+        "url": "https://yousiframazanoglu.github.io/dental-navigation-3d/",
+        "author": { "@type": "Organization", "name": "GençBiyo" },
+        "description": "CBCT hacminden yedi anatomik yapıyı segmente eden, cerrahi aleti gerçek zamanlı izleyen ve güvenlik eşiği aşıldığında holografik uyarı üreten navigasyon yazılımı."
+      },
+      {
+        "@type": "WebSite",
+        "name": "Dental Navigasyon",
+        "url": "https://yousiframazanoglu.github.io/dental-navigation-3d/",
+        "inLanguage": "tr",
+        "publisher": { "@type": "Organization", "name": "GençBiyo" }
+      }
+    ]
+  }
+  </script>
 </head>
 <body data-theme="light">
   <canvas id="scene"></canvas>
