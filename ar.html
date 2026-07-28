@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>الملاحة السنّية ثلاثية الأبعاد — نظام ملاحة جراحية ديناميكي مدعوم بالذكاء الاصطناعي</title>
+  <meta name="description" content="ملاحة سنّية ثلاثية الأبعاد مدعومة بالذكاء الاصطناعي: تجزئة القناة السنخية السفلية والجيب الفكّي العلوي من حجم CBCT باستخدام nnU-Net v2، وواجهة واقع مختلط على HoloLens 2، وتنبيه تلقائي عند عتبة أمان 2 مم." />
+  <meta name="keywords" content="الملاحة السنّية ثلاثية الأبعاد, نظام ملاحة جراحية, ملاحة زراعة الأسنان, تجزئة القناة السنخية السفلية, nnU-Net, تجزئة CBCT, HoloLens 2 جراحة, الواقع المختلط في طب الأسنان, الذكاء الاصطناعي في زراعة الأسنان" />
+  <meta name="author" content="Noor Ahmed Hussein AL-GBURİ, Yousif Mustafa Hamid ALRAMDHAN" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="canonical" href="https://yousiframazanoglu.github.io/dental-navigation-3d/ar.html" />
+  <link rel="alternate" hreflang="tr" href="https://yousiframazanoglu.github.io/dental-navigation-3d/" />
+  <link rel="alternate" hreflang="en" href="https://yousiframazanoglu.github.io/dental-navigation-3d/en.html" />
+  <link rel="alternate" hreflang="ar" href="https://yousiframazanoglu.github.io/dental-navigation-3d/ar.html" />
+  <link rel="alternate" hreflang="x-default" href="https://yousiframazanoglu.github.io/dental-navigation-3d/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ar_AR" />
+  <meta property="og:url" content="https://yousiframazanoglu.github.io/dental-navigation-3d/ar.html" />
+  <meta property="og:title" content="نظام ملاحة جراحية سنّية ديناميكي" />
+  <meta property="og:description" content="تجزئة من حجم CBCT حقيقي باستخدام nnU-Net v2، وواجهة واقع مختلط على HoloLens 2، وتنبيه تلقائي عند عتبة أمان 2 مم." />
+  <meta property="og:image" content="https://yousiframazanoglu.github.io/dental-navigation-3d/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/style.css" />
+  <link rel="stylesheet" href="/src/rtl.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ResearchProject",
+        "@id": "https://yousiframazanoglu.github.io/dental-navigation-3d/ar.html#project",
+        "name": "نظام ملاحة جراحية ديناميكي مدمج بالتصوير المقطعي ثلاثي الأبعاد لزراعة الأسنان والتخدير الموضعي",
+        "alternateName": "الملاحة السنّية ثلاثية الأبعاد",
+        "url": "https://yousiframazanoglu.github.io/dental-navigation-3d/ar.html",
+        "description": "نظام ملاحة جراحية ديناميكي يجزّئ القناة السنخية السفلية والجيب الفكّي العلوي وبنى تشريحية أخرى من أحجام CBCT باستخدام nnU-Net v2، ويتتبّع طرف الأداة آنيًّا، ويُصدر تنبيهًا تلقائيًّا عند عتبة أمان 2 مم، ويعرض ذلك للجرّاح عبر واجهة واقع مختلط على HoloLens 2.",
+        "inLanguage": "ar",
+        "keywords": "الملاحة السنّية ثلاثية الأبعاد, الملاحة الجراحية الديناميكية, تجزئة القناة السنخية السفلية, تجزئة CBCT, nnU-Net v2, HoloLens 2, الواقع المختلط, الذكاء الاصطناعي في طب الأسنان",
+        "funder": {
+          "@type": "Organization",
+          "name": "مجلس البحث العلمي والتكنولوجي في تركيا",
+          "alternateName": "TÜBİTAK",
+          "url": "https://www.tubitak.gov.tr/"
+        },
+        "member": [
+          {
+            "@type": "Person",
+            "name": "نور أحمد حسين الجبوري",
+            "jobTitle": "قائدة الفريق ومديرة المشروع",
+            "affiliation": { "@type": "CollegeOrUniversity", "name": "جامعة إسطنبول غيليشيم — كلية طب الأسنان" }
+          },
+          {
+            "@type": "Person",
+            "name": "يوسف مصطفى حامد الرمضان",
+            "jobTitle": "بنية البرمجيات والتطوير",
+            "affiliation": { "@type": "CollegeOrUniversity", "name": "جامعة بارتين — قسم هندسة الحاسوب" }
+          }
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://yousiframazanoglu.github.io/dental-navigation-3d/ar.html#software",
+        "name": "الملاحة السنّية ثلاثية الأبعاد",
+        "applicationCategory": "MedicalApplication",
+        "operatingSystem": "Windows 10/11, HoloLens 2",
+        "url": "https://yousiframazanoglu.github.io/dental-navigation-3d/ar.html",
+        "description": "برنامج ملاحة جراحية مدعوم بالذكاء الاصطناعي: تجزئة سبع بنى تشريحية من CBCT باستخدام nnU-Net v2، وتتبّع بصري بتردّد 60 هرتز، وإرشاد بالواقع المختلط على HoloLens 2، وتنبيه تلقائي عند عتبة الأمان 2 مم.",
+        "isPartOf": { "@id": "https://yousiframazanoglu.github.io/dental-navigation-3d/ar.html#project" }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://yousiframazanoglu.github.io/dental-navigation-3d/#website",
+        "url": "https://yousiframazanoglu.github.io/dental-navigation-3d/",
+        "name": "الملاحة السنّية ثلاثية الأبعاد",
+        "inLanguage": ["tr", "en", "ar"]
+      }
+    ]
+  }
+  </script>
+</head>
+<body data-theme="light">
+  <canvas id="scene"></canvas>
+  <div id="annotations">
+    <div class="anno" data-key="mandible"><span class="anno-dot"></span><span class="anno-txt">الفكّ السفلي<i>عظم الفكّ الأسفل</i></span></div>
+    <div class="anno" data-key="nerve"><span class="anno-dot danger"></span><span class="anno-txt">القناة السنخية السفلية<i>مسار العصب</i></span></div>
+    <div class="anno" data-key="sinus"><span class="anno-dot info"></span><span class="anno-txt">الجيب الفكّي العلوي<i>تجويف هوائي</i></span></div>
+    <div class="anno" data-key="teeth"><span class="anno-dot"></span><span class="anno-txt">الأسنان<i>العلوية والسفلية</i></span></div>
+  </div>
+
+  <div id="rail"><div id="rail-fill"></div></div>
+
+  <div id="loader">
+    <div class="loader-inner">
+      <div class="loader-label">جارٍ تحميل نموذج التجزئة</div>
+      <div class="loader-track"><div class="loader-bar" id="loader-bar"></div></div>
+      <div class="loader-pct" id="loader-pct">00</div>
+    </div>
+  </div>
+
+  <header id="nav">
+    <a class="nav-brand" href="#top">
+      <img src="/img/logo.png" alt="" />
+      <span>الملاحة السنّية</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#anatomi">التشريح</a>
+      <a href="#sorun">المشكلة</a>
+      <a href="#mimari">البنية</a>
+      <a href="#yapayzeka">الذكاء الاصطناعي</a>
+      <a href="#hololens">HoloLens</a>
+      <a href="#arayuz">الواجهة</a>
+      <a href="#hassasiyet">الدقّة</a>
+    </nav>
+    <!-- relative hrefs so they resolve both at the root and under the Pages base path -->
+    <span class="nav-actions">
+      <a class="nav-deck" href="./">TR</a>
+      <a class="nav-deck" href="en.html">EN</a>
+      <a class="nav-deck" href="sunum.html">العرض ↖</a>
+    </span>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="top" data-theme="light">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">TÜBİTAK 2242 · TEKNOFEST 2026 — فئة الصحّة</p>
+          <h1 class="display">ملاحة جراحية<br/>سنّية ديناميكية</h1>
+          <p class="lead">منصّة ملاحة تجمع في نظام واحد التجزئة التشريحية القائمة على الذكاء الاصطناعي، والتتبّع البصري الآنيّ، وعرض الواقع المختلط، لعمليات زراعة الأسنان والتخدير الموضعي.</p>
+        </div>
+      </div>
+      <div class="wrap hero-metrics">
+        <div class="metric"><span class="metric-k">متوسّط Dice — nnU-Net v2</span><span class="metric-v">0.8937</span></div>
+        <div class="metric"><span class="metric-k">تردّد تتبّع الملاحة</span><span class="metric-v">60 Hz</span></div>
+        <div class="metric"><span class="metric-k">زمن الاستجابة الكلّي</span><span class="metric-v">&lt;50 ms</span></div>
+        <div class="metric"><span class="metric-k">البنى التشريحية المُجزّأة</span><span class="metric-v">7</span></div>
+      </div>
+    </section>
+
+    <!-- ANATOMY — dark chapter -->
+    <section class="stage" id="anatomi" data-theme="dark">
+      <div class="wrap">
+        <div class="stage-panel">
+          <p class="eyebrow">01 — مُخرَج تجزئة حقيقي</p>
+          <h2 class="h2">هذا الفكّ ليس رسمًا توضيحيًّا.</h2>
+          <p class="body">النموذج المعروض أُعيد بناؤه مباشرةً من قناع التجزئة الذي أنتجه نموذجنا المدرَّب بـ nnU-Net v2 على حجم CBCT حقيقي. الفكّ السفلي والفكّ العلوي والأسنان وقناة العصب والجيب الفكّي مُوسَّمة كلٌّ على حدة.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="stage" data-theme="dark">
+      <div class="wrap">
+        <div class="stage-panel">
+          <p class="eyebrow danger">02 — بنية حرجة</p>
+          <h2 class="h2">القناة السنخية السفلية.</h2>
+          <p class="body">عند وضع الزرعة على مسافة تقلّ عن 1 مم من القناة الفكّية السفلية يصبح الاضطراب الحسّي العصبي أمرًا حتميًّا. يقوم النظام بتجزئة هذا المسار ويُصدر تنبيهًا تلقائيًّا عند عتبة أمان قدرها 2 مم.</p>
+          <p class="cite">Peña-Cardelles وآخرون، 2025 — Med Oral Patol Oral Cir Bucal</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="stage" data-theme="dark">
+      <div class="wrap">
+        <div class="stage-panel">
+          <p class="eyebrow info">03 — الجيب الفكّي العلوي</p>
+          <h2 class="h2">منطقة الخطر في الفكّ العلوي.</h2>
+          <p class="body">انثقاب الجيب هو أكثر المضاعفات شيوعًا في جراحة الفكّ العلوي. يستخرج النظام حدود الجيب ويُنبّه عند عتبة 1.5 مم. وخلافًا للحلول المتاحة، يغطّي الفكّين السفلي والعلوي في منصّة واحدة.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROBLEM -->
+    <section class="sec" id="sorun" data-theme="light">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">04 — المشكلة</p>
+          <h2 class="h2">هامش خطأ دون المليمتر.</h2>
+        </header>
+        <div class="figures">
+          <div class="figure">
+            <span class="figure-v">3.5 مليار</span>
+            <p class="figure-d">إنسان متأثّر بأمراض الفم حول العالم.</p>
+            <span class="figure-s">WHO, 2022</span>
+          </div>
+          <div class="figure">
+            <span class="figure-v">صفر</span>
+            <p class="figure-d">لا يتضمّن أيٌّ من أنظمة الملاحة الحالية ذكاءً اصطناعيًّا حقيقيًّا.</p>
+            <span class="figure-s">Xu وآخرون، 2024 — npj Digital Medicine</span>
+          </div>
+          <div class="figure">
+            <span class="figure-v">غير موجود</span>
+            <p class="figure-d">لا يوجد في الأدبيات نظام يتتبّع إبرة التخدير الموضعي.</p>
+            <span class="figure-s">Tang وآخرون، 2024 — J Dent Res</span>
+          </div>
+          <div class="figure">
+            <span class="figure-v">75–85%</span>
+            <p class="figure-d">اعتماد على الاستيراد في سوق الأجهزة الطبّية؛ ولا منتج محلّي في هذا المجال.</p>
+            <span class="figure-s">Nexdigm, 2025</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ÖZGÜNLÜK -->
+    <section class="sec" id="ozgunluk" data-theme="light">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">05 — الأصالة العلمية</p>
+          <h2 class="h2">أربع فجوات بنيوية،<br/>تُسَدّ في آنٍ واحد.</h2>
+        </header>
+        <ol class="listing">
+          <li>
+            <span class="listing-n">01</span>
+            <div class="listing-b">
+              <h3>تكامل حقيقي مع الذكاء الاصطناعي</h3>
+              <p>أوّل نظام ملاحة يجزّئ أربع بنى تشريحية في آنٍ واحد باستخدام nnU-Net v2.</p>
+            </div>
+          </li>
+          <li>
+            <span class="listing-n">02</span>
+            <div class="listing-b">
+              <h3>تتبّع إبرة التخدير الموضعي</h3>
+              <p>نطاق أمان قدره 3 مم حول الثقبة الذقنية وتحت الحجاجية — الأوّل من نوعه في الأدبيات.</p>
+            </div>
+          </li>
+          <li>
+            <span class="listing-n">03</span>
+            <div class="listing-b">
+              <h3>أمان هجين للفكّين</h3>
+              <p>خوارزمية أمان تغطّي جراحة الفكّ السفلي والفكّ العلوي في منصّة واحدة.</p>
+            </div>
+          </li>
+          <li>
+            <span class="listing-n">04</span>
+            <div class="listing-b">
+              <h3>كثافة العظم أثناء العملية</h3>
+              <p>تصنيف Misch من D1 إلى D4 اعتمادًا على وحدات هاونسفيلد، مع اقتراح بروتوكول زرع خاصّ بالمنطقة.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- MİMARİ -->
+    <section class="sec" id="mimari" data-theme="light">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">06 — بنية النظام</p>
+          <h2 class="h2">بنية هجينة من ثلاث طبقات.</h2>
+        </header>
+        <div class="layers">
+          <article class="layer">
+            <span class="layer-n">الطبقة 1</span>
+            <div class="layer-b">
+              <h3>Python · nnU-Net v2</h3>
+              <p>تجزئة تشريحية قائمة على التعلّم العميق، وتحليل كثافة العظم بوحدات هاونسفيلد.</p>
+            </div>
+            <span class="layer-t">PyTorch · SimpleITK · ONNX / TensorRT</span>
+          </article>
+          <div class="layer-link"><span>JSON · ZeroMQ</span></div>
+          <article class="layer">
+            <span class="layer-n">الطبقة 2</span>
+            <div class="layer-b">
+              <h3>محرّك ملاحة بلغة C++</h3>
+              <p>بيانات موضعية بتردّد 60 هرتز من نظام التتبّع البصري NDI Polaris، مع فحص هجين لعتبات الأمان.</p>
+            </div>
+            <span class="layer-t">NDICAPI · 60 Hz · Safety algorithm</span>
+          </article>
+          <div class="layer-link"><span>UDP · Port 5555</span></div>
+          <article class="layer">
+            <span class="layer-n">الطبقة 3</span>
+            <div class="layer-b">
+              <h3>Unity · MRTK3 · HoloLens 2</h3>
+              <p>واجهة واقع مختلط تُسقِط الطبقات الهولوغرافية في مجال رؤية الجرّاح.</p>
+            </div>
+            <span class="layer-t">MRTK3 · Radial View · &lt;50 ms</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- YAPAY ZEKA -->
+    <section class="sec" id="yapayzeka" data-theme="light">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">07 — التجزئة بالذكاء الاصطناعي</p>
+          <h2 class="h2">نموذج مدرَّب بـ nnU-Net v2.</h2>
+          <p class="lead">دُرِّب النموذج على مجموعة بيانات ToothFairy2 (MICCAI 2024)، وهو يفصل الفكّ السفلي والفكّ العلوي والأسنان وقناة العصب والجيب في أحجام CBCT حقيقية. جميع القيم أدناه مقروءة من مُخرَج التحقّق الذي أنتجه التدريب (<span class="mono">summary.json</span>، 96 حالة).</p>
+        </header>
+        <div class="ai-grid">
+          <div class="table-scroll">
+          <table class="table">
+            <caption>Dice لكلّ صنف — على الحالات التي تحمل توسيمًا مرجعيًّا للبنية</caption>
+            <tbody>
+              <tr><th>الفكّ السفلي <span class="n-of">n=96</span></th><td class="bar-c"><span class="bar" style="--v:98.5"></span></td><td class="num">0.9845</td></tr>
+              <tr><th>البلعوم <span class="n-of">n=96</span></th><td class="bar-c"><span class="bar" style="--v:96.4"></span></td><td class="num">0.9636</td></tr>
+              <tr><th>الأسنان السفلية <span class="n-of">n=90</span></th><td class="bar-c"><span class="bar" style="--v:92"></span></td><td class="num">0.9195</td></tr>
+              <tr><th>الأسنان العلوية <span class="n-of">n=69</span></th><td class="bar-c"><span class="bar" style="--v:90"></span></td><td class="num">0.8996</td></tr>
+              <tr><th>الجيب الفكّي العلوي <span class="n-of">n=13</span></th><td class="bar-c"><span class="bar" style="--v:87.4"></span></td><td class="num">0.8742</td></tr>
+              <tr><th>القناة السنخية السفلية <span class="n-of">n=96</span></th><td class="bar-c"><span class="bar danger" style="--v:85.1"></span></td><td class="num">0.8511</td></tr>
+              <tr><th>الفكّ العلوي <span class="n-of">n=36</span></th><td class="bar-c"><span class="bar" style="--v:76.4"></span></td><td class="num">0.7635</td></tr>
+              <tr><th><b>المتوسّط</b></th><td class="bar-c"></td><td class="num strong">0.8937</td></tr>
+            </tbody>
+          </table>
+          </div>
+          <dl class="specs">
+            <div><dt>مجموعة البيانات</dt><dd>ToothFairy2 · 480 CBCT</dd></div>
+            <div><dt>الأصناف المستهدفة</dt><dd>7 structures</dd></div>
+            <div><dt>البنية</dt><dd>3D fullres · 100 epochs</dd></div>
+            <div><dt>مدّة التدريب</dt><dd>3.5 h · RTX 5070 Ti</dd></div>
+            <div><dt>أفضل EMA</dt><dd>0.9044 pseudo-Dice</dd></div>
+          </dl>
+        </div>
+
+        <div class="charts">
+          <figure class="chart" data-src="img/egitim_egrisi.ar.svg">
+            <figcaption>قيمة pseudo-Dice للتحقّق على امتداد 100 حقبة تدريب؛ الخطّ الداكن هو المتوسّط المتحرّك الأسّي.</figcaption>
+          </figure>
+          <figure class="chart" data-src="img/dice_f_vs_p.ar.svg">
+            <figcaption>النموذج نفسه على مجموعتَي تحقّق فرعيتين مختلفتين. الفارق لا يعود إلى النموذج بل إلى اكتمال التوسيم المرجعي.</figcaption>
+          </figure>
+        </div>
+
+        <div class="finding">
+          <p class="eyebrow danger">ملاحظة منهجية حول القياس</p>
+          <p>على مجموعة التحقّق كاملةً يبلغ متوسّط Dice <b>0.7405</b>. والفارق لا يعود إلى النموذج بل إلى اكتمال
+          التوسيم المرجعي: فبعض أحجام ToothFairy2 موسَّمة جزئيًّا، وثمّة بنى لم تُوسَّم فيها إطلاقًا. وفي هذه
+          الحالات، حتى لو جزّأ النموذج البنية تجزئةً صحيحة، يُسجَّل Dice صفرًا لغياب المرجع الذي يُقارَن به.
+          الجيب الفكّي العلوي موسَّم في <b>13</b> حالة فقط من أصل 96، والفكّ العلوي في <b>36</b> حالة؛ ومع ذلك
+          جزّأ النموذج الجيب في 15 حالة غير موسَّمة.</p>
+          <p style="margin-top:12px">لهذا يُبلَّغ عن كلّ بنية في الجدول اعتمادًا على <b>الحالات التي تظهر فيها في
+          المرجع فقط</b> — وهذا هو النهج المعياري مع مجموعات البيانات ذات التوسيم الجزئي. والقيمتان كلتاهما
+          مذكورتان هنا صراحةً.</p>
+        </div>
+        <figure class="shot wide shot-top">
+          <img src="/img/slicer.png" alt="مُخرَج تجزئة nnU-Net معروضًا في 3D Slicer" loading="lazy" />
+          <figcaption>3D Slicer — مُخرَج النموذج على حجم CBCT حقيقي: بنى موسَّمة في المقاطع المحورية والإكليلية والسهمية، مع إعادة البناء ثلاثية الأبعاد</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- KARMA GERÇEKLİK / HOLOLENS -->
+    <section class="sec" id="hololens" data-theme="dark">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">08 — طبقة الواقع المختلط</p>
+          <h2 class="h2">في مجال رؤية الجرّاح،<br/>خطوةً بخطوة.</h2>
+          <p class="lead">الواجهة المبنيّة على HoloLens 2 باستخدام Unity و MRTK3 تعرض بيانات الخطوات الواردة عبر UDP من محطّة التحكّم على هيئة لوحة هولوغرافية تتابع نظر الجرّاح بسلاسة عبر مكوّن Radial View.</p>
+        </header>
+
+        <div class="device" id="deviceStage">
+          <canvas id="deviceCanvas" tabindex="0" role="img"
+                  aria-label="نموذج ثلاثي الأبعاد لجهاز Microsoft HoloLens 2 — اسحب للتدوير"></canvas>
+          <p class="device-cap"><span class="device-hint">اسحب للتدوير</span>Microsoft HoloLens 2 — العتاد المستهدف</p>
+        </div>
+
+        <figure class="shot wide">
+          <img src="/img/mr_headset.png" alt="اللوحة الهولوغرافية للخطوات كما تُرى من داخل النظّارة" loading="lazy" />
+          <figcaption>المشهد من داخل النظّارة — تتبّع اليدين مُفعَّل، واللوحة الهولوغرافية معلّقة فوق ساحة العمل الجراحي</figcaption>
+        </figure>
+        <figure class="shot wide">
+          <img src="/img/mr_sync.png" alt="النظّارة ومحطّة التحكّم على الخطوة نفسها" loading="lazy" />
+          <figcaption><b>مزامنة آنيّة.</b> مشهد النظّارة على اليمين ومحطّة التحكّم المكتبية على اليسار — كلاهما على الخطوة 2/10 في اللحظة نفسها. وبمجرّد الضغط على «التالي» في المحطّة تتحدّث اللوحة داخل النظّارة فورًا. جرى التحقّق في محاكي Unity XR.</figcaption>
+        </figure>
+
+        <div class="shot-pair">
+          <figure class="shot">
+            <img src="/img/step_first.png" alt="الخطوة 1/10 — تحضير المريض ووضعيّته" loading="lazy" />
+            <figcaption>الخطوة 1/10 — بداية الإجراء</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="/img/step_last.png" alt="الخطوة 10/10 — الخياطة والإغلاق" loading="lazy" />
+            <figcaption>الخطوة 10/10 — يُغلَق سجلّ العملية في الخطوة الأخيرة</figcaption>
+          </figure>
+        </div>
+
+      </div>
+
+      <!-- full-bleed cinematic record -->
+      <div class="reel" id="reel">
+        <video class="reel-bg" id="reelLoop" autoplay muted loop playsinline preload="metadata" poster="/img/vr-poster.jpg" aria-hidden="true">
+          <source src="/video/vr-loop.mp4" type="video/mp4" />
+        </video>
+        <video class="reel-full" id="reelFull" controls playsinline preload="none" poster="/img/vr-poster.jpg">
+          <source src="/video/vr.mp4" type="video/mp4" />
+          متصفّحك لا يدعم عنصر الفيديو.
+        </video>
+        <div class="reel-scrim" id="reelScrim">
+          <div class="reel-copy">
+            <p class="eyebrow danger">تنبيه أمان — تسجيل حيّ</p>
+            <h3 class="reel-title">حين تُتجاوَز العتبة،<br/>ينبّه النظام الجرّاح.</h3>
+            <p class="reel-sub">أثناء حفر الثقب الدليلي، وبمجرّد الاقتراب من القناة السنخية السفلية دون عتبة الأمان البالغة 2 مم، يظهر التنبيه في اللحظة نفسها على اللوحة الهولوغرافية داخل النظّارة وعلى محطّة التحكّم معًا.</p>
+            <button class="reel-btn" id="reelPlay" type="button">
+              <span class="reel-btn-icon" aria-hidden="true"></span>
+              شاهد التسجيل كاملًا — 1:30
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrap">
+        <p class="reel-note">يُظهر التسجيل النظام وهو يعمل من طرف إلى طرف: عشر خطوات من اختيار الإجراء حتى الخياطة والإغلاق، والنظّارة ومحطّة التحكّم متزامنتان.</p>
+      </div>
+    </section>
+
+    <!-- ARAYÜZ -->
+    <section class="sec" id="arayuz" data-theme="light">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">09 — واجهة التحكّم السريرية</p>
+          <h2 class="h2">محطّة التحكّم المكتبية.</h2>
+          <p class="lead">لقطات حقيقية من التطبيق المطوَّر بـ C# / WPF بنمط MVVM، ويشمل إدارة المرضى عبر SQLite، ومحرّر الإجراءات، ومعاينة DICOM، وتشفير الحقول بمعيار AES-256.</p>
+        </header>
+        <figure class="shot wide">
+          <img src="/img/wpf_main.png" alt="الشاشة الرئيسية لمحطّة التحكّم" loading="lazy" />
+          <figcaption>الشاشة الرئيسية — قائمة المرضى، ونموذج التسجيل، وحالة البثّ الشبكي الحيّ في الشريط العلوي (Port 5555)</figcaption>
+        </figure>
+        <div class="shot-pair">
+          <figure class="shot">
+            <img src="/img/wpf_procedure.png" alt="شاشة إدارة الإجراءات والخطوات" loading="lazy" />
+            <figcaption>إدارة الإجراءات والخطوات — عمليات CRUD كاملة مع حماية التكامل المرجعي</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="/img/wpf_step.png" alt="شاشة اختيار الإجراء" loading="lazy" />
+            <figcaption>اختيار الإجراء على مستوى المريض وربط التصوير المقطعي</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- HASSASİYET -->
+    <section class="sec" id="hassasiyet" data-theme="light">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">10 — الدقّة المستهدفة</p>
+          <h2 class="h2">دون حدّ القبول السريري.</h2>
+        </header>
+        <div class="table-scroll table-full">
+        <table class="table">
+          <thead>
+            <tr><th>المقياس</th><th class="num">هدفنا</th><th class="num">متوسّط الأدبيات</th><th class="num">حدّ القبول السريري</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>انحراف نقطة الدخول</th><td class="num strong">≤ 1.0 mm</td><td class="num">1.11 mm</td><td class="num">≤ 1.5 mm</td></tr>
+            <tr><th>انحراف نقطة الذروة</th><td class="num strong">≤ 1.2 mm</td><td class="num">1.40 mm</td><td class="num">≤ 2.0 mm</td></tr>
+            <tr><th>الانحراف الزاوي</th><td class="num strong">≤ 3.0°</td><td class="num">3.51°</td><td class="num">≤ 5.0°</td></tr>
+            <tr><th>زمن الاستجابة الكلّي</th><td class="num strong">≤ 50 ms</td><td class="num">—</td><td class="num">≤ 100 ms</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <div class="table-scroll table-full">
+        <table class="table">
+          <thead>
+            <tr><th>عتبة الأمان</th><th class="num">المسافة</th><th class="num">الحسّاسية المستهدفة</th><th class="num">النوعية المستهدفة</th></tr>
+          </thead>
+          <tbody>
+            <tr><th><span class="swatch danger"></span>قناة العصب الفكّي السفلي</th><td class="num strong">2.0 mm</td><td class="num">≥ 95%</td><td class="num">≥ 98%</td></tr>
+            <tr><th><span class="swatch info"></span>الجيب الفكّي العلوي</th><td class="num strong">1.5 mm</td><td class="num">≥ 95%</td><td class="num">≥ 98%</td></tr>
+            <tr><th><span class="swatch"></span>الثقبة — نطاق الإبرة</th><td class="num strong">3.0 mm</td><td class="num">≥ 95%</td><td class="num">≥ 95%</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- KÜNYE -->
+    <footer class="sec credits" id="ekip" data-theme="light">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">الفريق</p>
+          <h2 class="h2 title-long">نظام ملاحة جراحية ديناميكي مدمج بالتصوير المقطعي ثلاثي الأبعاد لزراعة الأسنان والتخدير الموضعي</h2>
+        </header>
+        <div class="team">
+          <div class="person">
+            <h3>نور أحمد حسين الجبوري</h3>
+            <p>قائدة الفريق · مديرة المشروع — البحث السريري والبروتوكول الجراحي</p>
+            <span>تحليل المتطلّبات السريرية، وتصميم سير العمل الجراحي، والتوسيم التشريحي والتحقّق · طالبة في كلّية طبّ الأسنان، جامعة إسطنبول غيليشيم</span>
+          </div>
+          <div class="person">
+            <h3>يوسف مصطفى حامد الرمضان</h3>
+            <p>بنية البرمجيات والتطوير</p>
+            <span>واجهة الواقع المختلط، ومحطّة التحكّم السريرية، ومسار التجزئة بالذكاء الاصطناعي · طالب في قسم هندسة الحاسوب، جامعة بارتين</span>
+          </div>
+        </div>
+        <div class="foot">
+          <span>GençBiyo</span>
+          <span>TÜBİTAK 2242 — مسابقة مشاريع بحوث طلبة الجامعات · فئة الصحّة 2026</span>
+        </div>
+        <p class="colophon">
+          النموذج ثلاثي الأبعاد لجهاز HoloLens 2: <a href="https://sketchfab.com/3d-models/hololens-2-3dd665394e6f4b62ba16338e55828ddd" target="_blank" rel="noopener noreferrer">“Hololens 2”</a>،
+          بريشة <a href="https://sketchfab.com/muertoHambre" target="_blank" rel="noopener noreferrer">Faber</a> —
+          مستخدَم بموجب رخصة <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>.
+          أمّا نموذج الفكّ فقد أُنتج من مُخرَج تجزئة nnU-Net v2 الخاصّ بالمشروع نفسه.
+        </p>
+      </div>
+    </footer>
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

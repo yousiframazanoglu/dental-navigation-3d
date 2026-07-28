@@ -12,6 +12,7 @@
   <link rel="canonical" href="https://yousiframazanoglu.github.io/dental-navigation-3d/en.html" />
   <link rel="alternate" hreflang="tr" href="https://yousiframazanoglu.github.io/dental-navigation-3d/" />
   <link rel="alternate" hreflang="en" href="https://yousiframazanoglu.github.io/dental-navigation-3d/en.html" />
+  <link rel="alternate" hreflang="ar" href="https://yousiframazanoglu.github.io/dental-navigation-3d/ar.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="en_GB" />
@@ -82,7 +83,7 @@
         "@id": "https://yousiframazanoglu.github.io/dental-navigation-3d/#website",
         "url": "https://yousiframazanoglu.github.io/dental-navigation-3d/",
         "name": "3D Dental Navigation",
-        "inLanguage": ["tr", "en"]
+        "inLanguage": ["tr", "en", "ar"]
       }
     ]
   }
@@ -112,12 +113,18 @@
     <nav class="nav-links">
       <a href="#anatomy">Anatomy</a>
       <a href="#problem">Problem</a>
+      <a href="#originality">Originality</a>
       <a href="#architecture">Architecture</a>
       <a href="#ai">AI</a>
       <a href="#hololens">HoloLens</a>
+      <a href="#interface">Interface</a>
       <a href="#precision">Precision</a>
     </nav>
-    <a class="nav-deck" href="./">Türkçe ↗</a>
+    <span class="nav-actions">
+      <a class="nav-deck" href="./">TR</a>
+      <a class="nav-deck" href="ar.html">عربي</a>
+      <a class="nav-deck" href="sunum.html">Deck ↗</a>
+    </span>
   </header>
 
   <main>
@@ -177,10 +184,49 @@
       </div>
     </section>
 
+    <section class="sec" id="originality" data-theme="light">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">05 — Originality</p>
+          <h2 class="h2">Four structural gaps,<br/>closed at once.</h2>
+        </header>
+        <ol class="listing">
+          <li>
+            <span class="listing-n">01</span>
+            <div class="listing-b">
+              <h3>Genuine AI integration</h3>
+              <p>The first navigation system to segment four anatomical structures simultaneously with nnU-Net v2.</p>
+            </div>
+          </li>
+          <li>
+            <span class="listing-n">02</span>
+            <div class="listing-b">
+              <h3>Local anaesthesia needle tracking</h3>
+              <p>A 3 mm safety radius around the mental and infraorbital foramina — the first of its kind in the literature.</p>
+            </div>
+          </li>
+          <li>
+            <span class="listing-n">03</span>
+            <div class="listing-b">
+              <h3>Dual-jaw hybrid safety</h3>
+              <p>A safety algorithm covering both mandibular and maxillary surgery on a single platform.</p>
+            </div>
+          </li>
+          <li>
+            <span class="listing-n">04</span>
+            <div class="listing-b">
+              <h3>Intraoperative bone density</h3>
+              <p>Hounsfield-based Misch D1–D4 classification with a site-specific implant protocol recommendation.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
     <section class="sec" id="architecture" data-theme="light">
       <div class="wrap">
         <header class="sec-head">
-          <p class="eyebrow">05 — System architecture</p>
+          <p class="eyebrow">06 — System architecture</p>
           <h2 class="h2">A three-layer hybrid design.</h2>
         </header>
         <div class="layers">
@@ -208,7 +254,7 @@
     <section class="sec" id="ai" data-theme="light">
       <div class="wrap">
         <header class="sec-head">
-          <p class="eyebrow">06 — AI segmentation</p>
+          <p class="eyebrow">07 — AI segmentation</p>
           <h2 class="h2">A model trained with nnU-Net v2.</h2>
           <p class="lead">Trained on the MICCAI 2024 ToothFairy2 dataset. Every figure below is read from the validation output the training itself produced (<span class="mono">summary.json</span>, 96 cases).</p>
         </header>
@@ -238,10 +284,10 @@
         </div>
 
         <div class="charts">
-          <figure class="chart" data-src="img/egitim_egrisi.svg">
+          <figure class="chart" data-src="img/egitim_egrisi.en.svg">
             <figcaption>Validation pseudo-Dice across 100 epochs; the solid line is the exponential moving average.</figcaption>
           </figure>
-          <figure class="chart" data-src="img/dice_f_vs_p.svg">
+          <figure class="chart" data-src="img/dice_f_vs_p.en.svg">
             <figcaption>The same model under two evaluations. The gap comes from reference-label completeness, not from the model.</figcaption>
           </figure>
         </div>
@@ -269,10 +315,17 @@
     <section class="sec" id="hololens" data-theme="dark">
       <div class="wrap">
         <header class="sec-head">
-          <p class="eyebrow">07 — Mixed-reality layer</p>
+          <p class="eyebrow">08 — Mixed-reality layer</p>
           <h2 class="h2">In the surgeon's field of view,<br/>step by step.</h2>
           <p class="lead">Built on HoloLens 2 with Unity and MRTK3, the interface renders the step data arriving over UDP from the control station as a holographic panel that gently follows the surgeon's gaze.</p>
         </header>
+
+        <div class="device" id="deviceStage">
+          <canvas id="deviceCanvas" tabindex="0" role="img"
+                  aria-label="Microsoft HoloLens 2 three-dimensional model — drag to rotate"></canvas>
+          <p class="device-cap"><span class="device-hint">Drag to rotate</span>Microsoft HoloLens 2 — target hardware</p>
+        </div>
+
         <figure class="shot wide">
           <img src="/img/mr_headset.png" alt="Holographic step panel seen through the headset" loading="lazy" />
           <figcaption>View from inside the headset — hand tracking active, the holographic step panel suspended above the operating field</figcaption>
@@ -281,13 +334,75 @@
           <img src="/img/mr_sync.png" alt="Headset and control station on the same step" loading="lazy" />
           <figcaption><b>Live synchronisation.</b> Headset view on the left, desktop control station on the right — both on step 2/10 at the same moment. Advancing on the station updates the panel in the headset immediately. Verified in the Unity XR simulator.</figcaption>
         </figure>
+
+        <div class="shot-pair">
+          <figure class="shot">
+            <img src="/img/step_first.png" alt="Step 1/10 — patient preparation and positioning" loading="lazy" />
+            <figcaption>Step 1/10 — the start of the procedure</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="/img/step_last.png" alt="Step 10/10 — suturing and closure" loading="lazy" />
+            <figcaption>Step 10/10 — the operation record is closed on the final step</figcaption>
+          </figure>
+        </div>
+
+      </div>
+
+      <!-- full-bleed cinematic record -->
+      <div class="reel" id="reel">
+        <video class="reel-bg" id="reelLoop" autoplay muted loop playsinline preload="metadata" poster="/img/vr-poster.jpg" aria-hidden="true">
+          <source src="/video/vr-loop.mp4" type="video/mp4" />
+        </video>
+        <video class="reel-full" id="reelFull" controls playsinline preload="none" poster="/img/vr-poster.jpg">
+          <source src="/video/vr.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div class="reel-scrim" id="reelScrim">
+          <div class="reel-copy">
+            <p class="eyebrow danger">Safety alert — live recording</p>
+            <h3 class="reel-title">The system warns the surgeon<br/>the moment the margin is crossed.</h3>
+            <p class="reel-sub">While the pilot hole is being drilled, the alert appears simultaneously on the holographic panel in the headset and on the control station as soon as the drill comes within the 2 mm safety margin of the inferior alveolar canal.</p>
+            <button class="reel-btn" id="reelPlay" type="button">
+              <span class="reel-btn-icon" aria-hidden="true"></span>
+              Watch the full recording — 1:30
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrap">
+        <p class="reel-note">The recording shows the system running end to end: ten steps from procedure selection through to suturing and closure, headset and control station in sync.</p>
+      </div>
+    </section>
+
+    <section class="sec" id="interface" data-theme="light">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">09 — Clinical control interface</p>
+          <h2 class="h2">The desktop control station.</h2>
+          <p class="lead">Real screens from the C# / WPF application, built on MVVM, with SQLite patient management, a procedure editor, DICOM preview and AES-256 field encryption.</p>
+        </header>
+        <figure class="shot wide">
+          <img src="/img/wpf_main.png" alt="Control station main screen" loading="lazy" />
+          <figcaption>Main screen — patient list, registration form and live network broadcast status in the top bar (Port 5555)</figcaption>
+        </figure>
+        <div class="shot-pair">
+          <figure class="shot">
+            <img src="/img/wpf_procedure.png" alt="Procedure and step management screen" loading="lazy" />
+            <figcaption>Procedure and step management — full CRUD with referential integrity protection</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="/img/wpf_step.png" alt="Procedure selection screen" loading="lazy" />
+            <figcaption>Per-patient procedure selection and tomography linking</figcaption>
+          </figure>
+        </div>
       </div>
     </section>
 
     <section class="sec" id="precision" data-theme="light">
       <div class="wrap">
         <header class="sec-head">
-          <p class="eyebrow">08 — Target precision</p>
+          <p class="eyebrow">10 — Target precision</p>
           <h2 class="h2">Below the clinical acceptance limit.</h2>
         </header>
         <div class="table-scroll table-full">

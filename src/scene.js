@@ -67,6 +67,8 @@ export class JawScene {
     scene.add(this.spin)
 
     this.isMobile = window.innerWidth < 760
+    // -1 mirrors every horizontal keyframe offset for right-to-left pages
+    this.oxSign = document.documentElement.dir === 'rtl' ? -1 : 1
     window.addEventListener('resize', () => this._resize())
   }
 
@@ -201,7 +203,8 @@ export class JawScene {
 
     if (this.model) {
       // mobile: center the model, shrink it, raise it into the upper area for readability
-      let d = k.d, ox = k.ox, oy = 0
+      // rtl: copy sits on the right, so the model has to move to the left
+      let d = k.d, ox = k.ox * this.oxSign, oy = 0
       // oy>0 pans the view up => subject moves DOWN; use negative to raise into the top band
       if (this.isMobile) { d = k.d * 1.3; ox = 0; oy = k.ox !== 0 ? -0.72 : 0 }
 

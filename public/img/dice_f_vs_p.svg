@@ -1,12 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 507" width="780" height="507" role="img"
-  aria-label="Tam etiketli ve kısmi etiketli doğrulama alt kümelerinde sınıf bazında Dice karşılaştırması">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 507" width="780" height="507" role="img" direction="ltr" aria-label="Tam etiketli ve kısmi etiketli doğrulama alt kümelerinde sınıf bazında Dice karşılaştırması">
   <text x="0" y="20" font-family="'Inter Tight','Inter',system-ui,sans-serif" font-size="17" font-weight="600" fill="#0E1116">Eksik etiketlerin ölçüme etkisi</text>
   <text x="0" y="42" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="12.5" fill="#5C6675">Yapı referansta yoksa Dice sıfır yazılır; bu vakalar ortalamayı yapay olarak düşürür</text>
   <g font-family="'JetBrains Mono',ui-monospace,monospace" font-size="12">
     <rect x="0" y="58" width="22" height="10" rx="3" fill="#1B44E5"/>
     <text x="30" y="67" fill="#0E1116">Yapı etiketliyken</text>
-    <rect x="196" y="58" width="22" height="10" rx="3" fill="#A9761B"/>
-    <text x="226" y="67" fill="#0E1116">Ham ortalama (96 vaka)</text>
+    <rect x="158.2" y="58" width="22" height="10" rx="3" fill="#A9761B"/>
+    <text x="188.2" y="67" fill="#0E1116">Ham ortalama (96 vaka)</text>
   </g>
   
     <line x1="260" y1="78" x2="260" y2="477" stroke="#E3E5E9" stroke-width="1"/>

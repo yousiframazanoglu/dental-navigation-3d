@@ -1,0 +1,161 @@
+/* ============================================================
+   Arabic / RTL layer — loaded only by ar.html, after style.css
+
+   The Latin families are *extended* over the Arabic unicode
+   ranges with IBM Plex Sans Arabic. Every existing rule then
+   keeps working untouched: Latin glyphs still render in Inter /
+   Inter Tight / JetBrains Mono, Arabic glyphs fall back to Plex
+   Arabic per glyph. No selector in style.css needs to change.
+
+   IBM Plex Sans Arabic — SIL Open Font License 1.1
+   Copyright 2018 IBM Corp. — see /fonts/OFL.txt
+   ============================================================ */
+
+@font-face{font-family:'Inter Tight';src:url('/fonts/plex-arabic-400.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC}
+@font-face{font-family:'Inter Tight';src:url('/fonts/plex-arabic-500.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC}
+@font-face{font-family:'Inter Tight';src:url('/fonts/plex-arabic-600.woff2') format('woff2');font-weight:600;font-style:normal;font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC}
+@font-face{font-family:'Inter Tight';src:url('/fonts/plex-arabic-700.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC}
+
+@font-face{font-family:'Inter';src:url('/fonts/plex-arabic-400.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC}
+@font-face{font-family:'Inter';src:url('/fonts/plex-arabic-500.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC}
+@font-face{font-family:'Inter';src:url('/fonts/plex-arabic-600.woff2') format('woff2');font-weight:600;font-style:normal;font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC}
+
+@font-face{font-family:'JetBrains Mono';src:url('/fonts/plex-arabic-400.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC}
+@font-face{font-family:'JetBrains Mono';src:url('/fonts/plex-arabic-500.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC}
+
+/* ------------------------------------------------------------
+   1. Arabic typography rules that are NOT optional
+   Arabic script is cursive: letters join. Tracking pulls the
+   joins apart and text-transform is meaningless. Both must go.
+   ------------------------------------------------------------ */
+[dir="rtl"] body,
+[dir="rtl"] body *{
+  letter-spacing:normal;
+  text-transform:none;
+  font-feature-settings:"liga" 1,"calt" 1;
+}
+
+/* Arabic needs more leading than Latin — ascenders, descenders
+   and the deep bowls of ن ج ح would otherwise collide. */
+[dir="rtl"] .display{line-height:1.22}
+[dir="rtl"] .h2{line-height:1.28}
+[dir="rtl"] .lead{line-height:1.85;font-size:clamp(16px,1.55vw,19px)}
+[dir="rtl"] .body{line-height:1.9}
+[dir="rtl"] .listing-b p,
+[dir="rtl"] .finding p,
+[dir="rtl"] .shot figcaption,
+[dir="rtl"] .chart figcaption,
+[dir="rtl"] .reel-sub{line-height:1.9}
+[dir="rtl"] .listing-b h3,
+[dir="rtl"] .layer-b h3{line-height:1.45}
+[dir="rtl"] .reel-title{line-height:1.3}
+
+/* Caps-and-tracking labels lose their signal in Arabic; weight
+   and size carry it instead. */
+[dir="rtl"] .eyebrow{font-size:12.5px;font-weight:500}
+[dir="rtl"] .table thead th,
+[dir="rtl"] .table caption,
+[dir="rtl"] .metric-k,
+[dir="rtl"] .layer-n,
+[dir="rtl"] .layer-link span,
+[dir="rtl"] .device-cap,
+[dir="rtl"] .loader-label{font-size:11.5px;font-weight:500}
+
+/* ------------------------------------------------------------
+   2. Numbers, units and code stay left-to-right
+   "<50 ms" would otherwise render as "ms 50>".
+   ------------------------------------------------------------ */
+[dir="rtl"] .metric-v,
+[dir="rtl"] .figure-v,
+[dir="rtl"] .table .num,
+[dir="rtl"] .specs dd,
+[dir="rtl"] .mono,
+[dir="rtl"] .n-of,
+[dir="rtl"] .layer-t,
+[dir="rtl"] .nav-meta,
+[dir="rtl"] [dir="ltr"]{
+  direction:ltr;
+  unicode-bidi:isolate;
+}
+[dir="rtl"] .metric-v,
+[dir="rtl"] .figure-v,
+[dir="rtl"] .layer-t,
+[dir="rtl"] .nav-meta{text-align:right}
+[dir="rtl"] .specs dd{text-align:left}
+
+/* ------------------------------------------------------------
+   3. Mirrored physical properties
+   style.css predates this page and uses left/right directly.
+   ------------------------------------------------------------ */
+
+/* hero + figure separators: the rule sits between items, so in
+   RTL it moves to the inline-start edge, and the LAST item
+   (leftmost on screen) is the one that loses it */
+[dir="rtl"] .metric,
+[dir="rtl"] .figure{border-right:0}
+[dir="rtl"] .metric{padding:20px 0 0 22px;border-left:1px solid var(--line-soft)}
+[dir="rtl"] .figure{padding:30px 0 0 26px;border-left:1px solid var(--line-soft)}
+[dir="rtl"] .metric:last-child,
+[dir="rtl"] .figure:last-child{border-left:0}
+
+/* tables */
+[dir="rtl"] .table caption{text-align:right}
+[dir="rtl"] .table th,
+[dir="rtl"] .table td{text-align:right;padding:15px 0 15px 14px}
+[dir="rtl"] .table .num{text-align:left;padding-left:0;padding-right:14px}
+[dir="rtl"] .bar-c{padding-right:0!important;padding-left:20px!important}
+[dir="rtl"] .bar::after{left:auto;right:0}
+[dir="rtl"] .n-of{margin-left:0;margin-right:6px}
+
+/* measurement caveat rule */
+[dir="rtl"] .finding{
+  border-left:0;border-right:2px solid var(--danger);
+  padding:4px clamp(18px,2vw,28px) 4px 0;
+}
+[dir="rtl"] .swatch{margin-right:0;margin-left:10px}
+
+/* annotations pinned to the 3D model.
+   main.js positions these with translate(x,y) where x is a screen
+   pixel measured from the LEFT edge, so the box must stay anchored
+   there — in rtl an absolutely positioned box would otherwise take
+   its static position from the right edge and fly off screen.
+   The flex row itself reverses on its own: dot on the right, label
+   trailing left, which is the correct mirror. */
+[dir="rtl"] .anno{left:0;right:auto}
+[dir="rtl"] .anno-txt{
+  border-left:0;border-right:1px solid var(--line);
+  padding-left:0;padding-right:10px;
+}
+
+/* architecture layers */
+[dir="rtl"] .layer-link{padding:12px 110px 12px 0}
+
+/* full-bleed cinematic reel */
+[dir="rtl"] .reel{margin-left:0;margin-right:calc(50% - 50vw)}
+
+/* charts are data graphics: the bars grow left-to-right in every language.
+   Left to inherit rtl, text-anchor start/end swap and every axis label
+   lands on top of its own bar. The generated files also carry
+   direction="ltr" on the <svg> root; this is the belt to that pair of
+   braces, since main.js injects the markup inline. */
+[dir="rtl"] .chart svg{direction:ltr}
+
+/* ------------------------------------------------------------
+   4. Responsive mirrors — same breakpoints as style.css
+   ------------------------------------------------------------ */
+@media(max-width:1000px){
+  [dir="rtl"] .metric,
+  [dir="rtl"] .figure{border-left:0;padding-left:0}
+  [dir="rtl"] .metric:nth-child(odd),
+  [dir="rtl"] .figure:nth-child(odd){padding-right:0;padding-left:24px}
+  [dir="rtl"] .layer-link{padding-left:0;padding-right:90px}
+}
+@media(max-width:760px){
+  [dir="rtl"] .table th,
+  [dir="rtl"] .table td{padding-right:0;padding-left:10px}
+  [dir="rtl"] .table .num{padding-left:0;padding-right:10px}
+}
+@media(max-width:560px){
+  [dir="rtl"] .metric:nth-child(odd),
+  [dir="rtl"] .figure:nth-child(odd){padding-left:0}
+}
