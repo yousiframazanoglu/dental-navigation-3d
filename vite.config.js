@@ -15,6 +15,7 @@ export default defineConfig({
       input: {
         main: fileURLToPath(new URL('./index.html', import.meta.url)),
         sunum: fileURLToPath(new URL('./sunum.html', import.meta.url)),
+        en: fileURLToPath(new URL('./en.html', import.meta.url)),
       },
     },
   },

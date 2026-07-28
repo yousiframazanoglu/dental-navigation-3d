@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dental Navigation — Dynamic Surgical Navigation System</title>
+  <meta name="description" content="AI-based anatomical segmentation, real-time optical tracking and mixed-reality visualisation combined into a single dynamic surgical dental navigation platform." />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="canonical" href="https://yousiframazanoglu.github.io/dental-navigation-3d/en.html" />
+  <link rel="alternate" hreflang="tr" href="https://yousiframazanoglu.github.io/dental-navigation-3d/" />
+  <link rel="alternate" hreflang="en" href="https://yousiframazanoglu.github.io/dental-navigation-3d/en.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_GB" />
+  <meta property="og:url" content="https://yousiframazanoglu.github.io/dental-navigation-3d/en.html" />
+  <meta property="og:title" content="Dynamic Surgical Dental Navigation System" />
+  <meta property="og:description" content="Segmentation from real CBCT with nnU-Net v2, a HoloLens 2 mixed-reality interface, and an automatic alert at a 2 mm safety margin." />
+  <meta property="og:image" content="https://yousiframazanoglu.github.io/dental-navigation-3d/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body data-theme="light">
+  <canvas id="scene"></canvas>
+  <div id="annotations">
+    <div class="anno" data-key="mandible"><span class="anno-dot"></span><span class="anno-txt">Mandible<i>Lower jawbone</i></span></div>
+    <div class="anno" data-key="nerve"><span class="anno-dot danger"></span><span class="anno-txt">Inferior Alveolar Canal<i>Nerve pathway</i></span></div>
+    <div class="anno" data-key="sinus"><span class="anno-dot info"></span><span class="anno-txt">Maxillary Sinus<i>Air cavity</i></span></div>
+    <div class="anno" data-key="teeth"><span class="anno-dot"></span><span class="anno-txt">Dentition<i>Upper + lower teeth</i></span></div>
+  </div>
+
+  <div id="rail"><div id="rail-fill"></div></div>
+
+  <div id="loader">
+    <div class="loader-inner">
+      <div class="loader-label">Loading segmentation model</div>
+      <div class="loader-track"><div class="loader-bar" id="loader-bar"></div></div>
+      <div class="loader-pct" id="loader-pct">00</div>
+    </div>
+  </div>
+
+  <header id="nav">
+    <a class="nav-brand" href="#top"><img src="/img/logo.png" alt="" /><span>Dental Navigation</span></a>
+    <nav class="nav-links">
+      <a href="#anatomy">Anatomy</a>
+      <a href="#problem">Problem</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#ai">AI</a>
+      <a href="#hololens">HoloLens</a>
+      <a href="#precision">Precision</a>
+    </nav>
+    <a class="nav-deck" href="./">Türkçe ↗</a>
+  </header>
+
+  <main>
+    <section class="hero" id="top" data-theme="light">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">TÜBİTAK 2242 · 2026 — Health Category</p>
+          <h1 class="display">Dynamic surgical<br/>dental navigation</h1>
+          <p class="lead">A navigation platform for implant and local anaesthesia procedures, combining AI-based anatomical segmentation, real-time optical tracking and mixed-reality visualisation in a single system.</p>
+        </div>
+      </div>
+      <div class="wrap hero-metrics">
+        <div class="metric"><span class="metric-k">Mean Dice — nnU-Net v2</span><span class="metric-v">0.8937</span></div>
+        <div class="metric"><span class="metric-k">Tracking frequency</span><span class="metric-v">60 Hz</span></div>
+        <div class="metric"><span class="metric-k">End-to-end latency</span><span class="metric-v">&lt;50 ms</span></div>
+        <div class="metric"><span class="metric-k">Segmented structures</span><span class="metric-v">7</span></div>
+      </div>
+    </section>
+
+    <section class="stage" id="anatomy" data-theme="dark">
+      <div class="wrap"><div class="stage-panel">
+        <p class="eyebrow">01 — Real segmentation output</p>
+        <h2 class="h2">This jaw is not an illustration.</h2>
+        <p class="body">The model on screen was reconstructed directly from the segmentation mask our nnU-Net v2 produced on a real CBCT volume. Mandible, maxilla, teeth, nerve canal and maxillary sinus were each labelled separately.</p>
+      </div></div>
+    </section>
+
+    <section class="stage" data-theme="dark">
+      <div class="wrap"><div class="stage-panel">
+        <p class="eyebrow danger">02 — Critical structure</p>
+        <h2 class="h2">Inferior alveolar nerve canal.</h2>
+        <p class="body">When an implant is placed less than 1 mm from the mandibular canal, neurosensory disturbance is unavoidable. The system segments this pathway and raises an automatic alert at a 2 mm safety margin.</p>
+        <p class="cite">Peña-Cardelles et al., 2025 — Med Oral Patol Oral Cir Bucal</p>
+      </div></div>
+    </section>
+
+    <section class="stage" data-theme="dark">
+      <div class="wrap"><div class="stage-panel">
+        <p class="eyebrow info">03 — Maxillary sinus</p>
+        <h2 class="h2">The risk zone of the upper jaw.</h2>
+        <p class="body">Sinus perforation is the most frequent complication in maxillary surgery. The system extracts the sinus boundary and alerts at 1.5 mm. Unlike existing solutions, both jaws are covered on one platform.</p>
+      </div></div>
+    </section>
+
+    <section class="sec" id="problem" data-theme="light">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">04 — Problem</p>
+          <h2 class="h2">A margin of error below one millimetre.</h2>
+        </header>
+        <div class="figures">
+          <div class="figure"><span class="figure-v">3.5 billion</span><p class="figure-d">people are affected by oral diseases.</p><span class="figure-s">WHO, 2022</span></div>
+          <div class="figure"><span class="figure-v">Zero</span><p class="figure-d">Existing navigation systems contain no true artificial intelligence.</p><span class="figure-s">Xu et al., 2024 — npj Digital Medicine</span></div>
+          <div class="figure"><span class="figure-v">Undefined</span><p class="figure-d">No system for tracking the local anaesthesia needle exists in the literature.</p><span class="figure-s">Tang et al., 2024 — J Dent Res</span></div>
+          <div class="figure"><span class="figure-v">75–85%</span><p class="figure-d">Import dependency in the medical device market; no domestic product in this field.</p><span class="figure-s">Nexdigm, 2025</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="architecture" data-theme="light">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">05 — System architecture</p>
+          <h2 class="h2">A three-layer hybrid design.</h2>
+        </header>
+        <div class="layers">
+          <article class="layer">
+            <span class="layer-n">Layer 1</span>
+            <div class="layer-b"><h3>Python · nnU-Net v2</h3><p>Deep-learning anatomical segmentation and Hounsfield-unit bone density analysis.</p></div>
+            <span class="layer-t">PyTorch · SimpleITK · ONNX / TensorRT</span>
+          </article>
+          <div class="layer-link"><span>JSON · ZeroMQ</span></div>
+          <article class="layer">
+            <span class="layer-n">Layer 2</span>
+            <div class="layer-b"><h3>C++ navigation engine</h3><p>Reads instrument pose from an NDI Polaris optical tracker at 60 Hz and runs the hybrid safety algorithm.</p></div>
+            <span class="layer-t">NDICAPI · 60 Hz · Safety algorithm</span>
+          </article>
+          <div class="layer-link"><span>UDP · Port 5555</span></div>
+          <article class="layer">
+            <span class="layer-n">Layer 3</span>
+            <div class="layer-b"><h3>Unity · MRTK3 · HoloLens 2</h3><p>Projects holographic layers into the surgeon's field of view; the clinical workflow is driven from the desktop station.</p></div>
+            <span class="layer-t">MRTK3 · Radial View · &lt;50 ms</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="ai" data-theme="light">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">06 — AI segmentation</p>
+          <h2 class="h2">A model trained with nnU-Net v2.</h2>
+          <p class="lead">Trained on the MICCAI 2024 ToothFairy2 dataset. Every figure below is read from the validation output the training itself produced (<span class="mono">summary.json</span>, 96 cases).</p>
+        </header>
+        <div class="ai-grid">
+          <div class="table-scroll">
+          <table class="table">
+            <caption>Dice per class — cases where the structure is annotated</caption>
+            <tbody>
+              <tr><th>Mandible <span class="n-of">n=96</span></th><td class="bar-c"><span class="bar" style="--v:98.5"></span></td><td class="num">0.9845</td></tr>
+              <tr><th>Pharynx <span class="n-of">n=96</span></th><td class="bar-c"><span class="bar" style="--v:96.4"></span></td><td class="num">0.9636</td></tr>
+              <tr><th>Lower teeth <span class="n-of">n=90</span></th><td class="bar-c"><span class="bar" style="--v:92"></span></td><td class="num">0.9195</td></tr>
+              <tr><th>Upper teeth <span class="n-of">n=69</span></th><td class="bar-c"><span class="bar" style="--v:90"></span></td><td class="num">0.8996</td></tr>
+              <tr><th>Maxillary sinus <span class="n-of">n=13</span></th><td class="bar-c"><span class="bar" style="--v:87.4"></span></td><td class="num">0.8742</td></tr>
+              <tr><th>Inferior alveolar canal <span class="n-of">n=96</span></th><td class="bar-c"><span class="bar danger" style="--v:85.1"></span></td><td class="num">0.8511</td></tr>
+              <tr><th>Maxilla <span class="n-of">n=36</span></th><td class="bar-c"><span class="bar" style="--v:76.4"></span></td><td class="num">0.7635</td></tr>
+              <tr><th><b>Mean</b></th><td class="bar-c"></td><td class="num strong">0.8937</td></tr>
+            </tbody>
+          </table>
+          </div>
+          <dl class="specs">
+            <div><dt>Dataset</dt><dd>ToothFairy2 · 480 CBCT volumes</dd></div>
+            <div><dt>Target classes</dt><dd>7 anatomical structures</dd></div>
+            <div><dt>Configuration</dt><dd>3D fullres · 100 epochs</dd></div>
+            <div><dt>Training time</dt><dd>3.5 h · RTX 5070 Ti</dd></div>
+            <div><dt>Best EMA</dt><dd>0.9044 pseudo-Dice</dd></div>
+          </dl>
+        </div>
+
+        <div class="charts">
+          <figure class="chart" data-src="img/egitim_egrisi.svg">
+            <figcaption>Validation pseudo-Dice across 100 epochs; the solid line is the exponential moving average.</figcaption>
+          </figure>
+          <figure class="chart" data-src="img/dice_f_vs_p.svg">
+            <figcaption>The same model under two evaluations. The gap comes from reference-label completeness, not from the model.</figcaption>
+          </figure>
+        </div>
+
+        <div class="finding">
+          <p class="eyebrow danger">Measurement note</p>
+          <p>Across the full validation set the mean Dice is <b>0.7405</b>. The difference does not come from
+          the model but from the completeness of the reference labels: in part of the ToothFairy2 volumes some
+          structures are never annotated. In those cases the model may segment the structure correctly, yet with
+          no reference to compare against the Dice is recorded as zero. The maxillary sinus is annotated in only
+          <b>13</b> of 96 cases and the maxilla in <b>36</b>; the model still segmented the sinus in 15 of the
+          unannotated cases.</p>
+          <p style="margin-top:12px">Each structure is therefore reported <b>only over the cases in which it is
+          present in the reference</b> — the standard approach for partially annotated datasets. Both figures are
+          stated openly here.</p>
+        </div>
+
+        <figure class="shot wide shot-top">
+          <img src="/img/slicer.png" alt="nnU-Net segmentation output in 3D Slicer" loading="lazy" />
+          <figcaption>3D Slicer — the model's prediction on a real CBCT volume: labelled structures across axial, coronal and sagittal slices with the three-dimensional reconstruction</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="sec" id="hololens" data-theme="dark">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">07 — Mixed-reality layer</p>
+          <h2 class="h2">In the surgeon's field of view,<br/>step by step.</h2>
+          <p class="lead">Built on HoloLens 2 with Unity and MRTK3, the interface renders the step data arriving over UDP from the control station as a holographic panel that gently follows the surgeon's gaze.</p>
+        </header>
+        <figure class="shot wide">
+          <img src="/img/mr_headset.png" alt="Holographic step panel seen through the headset" loading="lazy" />
+          <figcaption>View from inside the headset — hand tracking active, the holographic step panel suspended above the operating field</figcaption>
+        </figure>
+        <figure class="shot wide">
+          <img src="/img/mr_sync.png" alt="Headset and control station on the same step" loading="lazy" />
+          <figcaption><b>Live synchronisation.</b> Headset view on the left, desktop control station on the right — both on step 2/10 at the same moment. Advancing on the station updates the panel in the headset immediately. Verified in the Unity XR simulator.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="sec" id="precision" data-theme="light">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">08 — Target precision</p>
+          <h2 class="h2">Below the clinical acceptance limit.</h2>
+        </header>
+        <div class="table-scroll table-full">
+        <table class="table">
+          <thead><tr><th>Metric</th><th class="num">Our target</th><th class="num">Literature mean</th><th class="num">Clinical limit</th></tr></thead>
+          <tbody>
+            <tr><th>Entry point deviation</th><td class="num strong">≤ 1.0 mm</td><td class="num">1.11 mm</td><td class="num">≤ 1.5 mm</td></tr>
+            <tr><th>Apex point deviation</th><td class="num strong">≤ 1.2 mm</td><td class="num">1.40 mm</td><td class="num">≤ 2.0 mm</td></tr>
+            <tr><th>Angular deviation</th><td class="num strong">≤ 3.0°</td><td class="num">3.51°</td><td class="num">≤ 5.0°</td></tr>
+            <tr><th>End-to-end latency</th><td class="num strong">≤ 50 ms</td><td class="num">—</td><td class="num">≤ 100 ms</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <div class="table-scroll table-full">
+        <table class="table">
+          <thead><tr><th>Safety threshold</th><th class="num">Distance</th><th class="num">Target sensitivity</th><th class="num">Target specificity</th></tr></thead>
+          <tbody>
+            <tr><th><span class="swatch danger"></span>Mandibular nerve canal</th><td class="num strong">2.0 mm</td><td class="num">≥ 95%</td><td class="num">≥ 98%</td></tr>
+            <tr><th><span class="swatch info"></span>Maxillary sinus</th><td class="num strong">1.5 mm</td><td class="num">≥ 95%</td><td class="num">≥ 98%</td></tr>
+            <tr><th><span class="swatch"></span>Foramen — needle radius</th><td class="num strong">3.0 mm</td><td class="num">≥ 95%</td><td class="num">≥ 95%</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p class="note" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mut);margin-top:24px;line-height:1.7">
+          All thresholds are taken from the clinical literature. Pre-clinical validation is planned on SLA phantom
+          models; there is no application on patients.</p>
+      </div>
+    </section>
+
+    <footer class="sec credits" id="team" data-theme="light">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">Credits</p>
+          <h2 class="h2 title-long">Dynamic Surgical Navigation System with 3D Tomography Integration for Dental Implantology and Local Anaesthesia</h2>
+        </header>
+        <div class="team">
+          <div class="person">
+            <h3>Noor Ahmed Hussein AL-GBURİ</h3>
+            <p>Team lead · Principal investigator — clinical research and surgical protocol</p>
+            <span>Clinical requirements, surgical workflow design, anatomical labelling and validation · student at İstanbul Gelişim University, Faculty of Dentistry</span>
+          </div>
+          <div class="person">
+            <h3>Yousif Mustafa Hamid ALRAMDHAN</h3>
+            <p>Software architecture and development</p>
+            <span>Mixed-reality interface, clinical control station and AI segmentation pipeline · student at Bartın University, Computer Engineering</span>
+          </div>
+        </div>
+        <div class="foot">
+          <span>GençBiyo</span>
+          <span>TÜBİTAK 2242 University Students Research Project Competition · 2026 Health Category</span>
+        </div>
+        <p class="colophon">
+          HoloLens 2 three-dimensional model: <a href="https://sketchfab.com/3d-models/hololens-2-3dd665394e6f4b62ba16338e55828ddd" target="_blank" rel="noopener noreferrer">“Hololens 2”</a>
+          by <a href="https://sketchfab.com/muertoHambre" target="_blank" rel="noopener noreferrer">Faber</a>, used under
+          <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>.
+          The jaw model was generated from this project's own nnU-Net v2 segmentation output.
+        </p>
+      </div>
+    </footer>
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

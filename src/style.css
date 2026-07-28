@@ -127,6 +127,7 @@ body[data-theme="light"] .nav-brand img{filter:invert(1) contrast(1.4)}
   transition:border-color .25s,background-color .25s;white-space:nowrap;
 }
 .nav-deck:hover{border-color:var(--fg)}
+.nav-actions{display:flex;gap:8px;align-items:center}
 
 /* ---------- annotations ---------- */
 #annotations{position:fixed;inset:0;z-index:5;pointer-events:none}
